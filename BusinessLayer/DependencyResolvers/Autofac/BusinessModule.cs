@@ -30,6 +30,9 @@ namespace BusinessLayer.DependencyResolvers.Autofac
 
             builder.RegisterType<NewsletterManager>().As<INewsletterService>();
             builder.RegisterType<EfNewsletterDal>().As<INewsletterDal>();
+
+            builder.RegisterType<UserManager>().As<IUserService>();
+            builder.RegisterType<EfUserDal>().As<IUserDal>();
         }
     }
 }

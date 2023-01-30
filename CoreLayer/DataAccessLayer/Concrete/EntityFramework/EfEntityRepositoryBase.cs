@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
-using CoreLayer.EntityLayer;
 using System.Linq.Expressions;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using CoreLayer.DataAccessLayer.Abstract;
+using CoreLayer.EntityLayer.Abstract;
 
 namespace CoreLayer.DataAccessLayer.Concrete.EntityFramework
 {

@@ -1,4 +1,4 @@
-﻿namespace CoreLayer.EntityLayer
+﻿namespace CoreLayer.EntityLayer.Abstract
 {
     public interface IEntity
     {

@@ -1,4 +1,4 @@
-﻿using CoreLayer.EntityLayer;
+﻿using CoreLayer.EntityLayer.Abstract;
 using Microsoft.AspNetCore.Identity;
 
 namespace EntityLayer.Concrete

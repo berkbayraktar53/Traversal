@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using DataAccessLayer.Concrete.EntityFramework.Contexts;
+using WebUILayer.Models;
 
 namespace WebUILayer
 {
@@ -22,7 +23,10 @@ namespace WebUILayer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DatabaseContext>();
-            services.AddIdentity<User, Role>().AddEntityFrameworkStores<DatabaseContext>();
+            services.AddIdentity<User, Role>()
+                .AddEntityFrameworkStores<DatabaseContext>()
+                .AddErrorDescriber<CustomIdentityValidator>()
+                .AddEntityFrameworkStores<DatabaseContext>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddMvc(config =>
             {

@@ -1,6 +1,6 @@
 ﻿using System;
-using CoreLayer.EntityLayer;
 using System.Collections.Generic;
+using CoreLayer.EntityLayer.Abstract;
 
 namespace EntityLayer.Concrete
 {

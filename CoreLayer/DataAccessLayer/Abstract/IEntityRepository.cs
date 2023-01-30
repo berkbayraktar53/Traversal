@@ -1,7 +1,7 @@
 ﻿using System;
-using CoreLayer.EntityLayer;
 using System.Linq.Expressions;
 using System.Collections.Generic;
+using CoreLayer.EntityLayer.Abstract;
 
 namespace CoreLayer.DataAccessLayer.Abstract
 {
