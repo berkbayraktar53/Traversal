@@ -3,6 +3,7 @@ using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using AspNetCoreHero.ToastNotification;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -28,6 +29,12 @@ namespace WebUILayer
                 .AddErrorDescriber<CustomIdentityValidator>()
                 .AddEntityFrameworkStores<DatabaseContext>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.AddNotyf(cfg =>
+            {
+                cfg.DurationInSeconds = 5;
+                cfg.IsDismissable = true;
+                cfg.Position = NotyfPosition.BottomRight;
+            });
             services.AddMvc(config =>
             {
                 var policy = new AuthorizationPolicyBuilder()
@@ -56,15 +63,15 @@ namespace WebUILayer
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                  name: "areas",
+                  pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                );
             });
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                  name: "areas",
-                  pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-                );
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AspNetCoreHero.ToastNotification" Version="1.1.0" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.17" />
@@ -23,7 +24,6 @@
   <ItemGroup>
     <Folder Include="Areas\Member\Data\" />
     <Folder Include="Areas\Member\Models\" />
-    <Folder Include="Areas\Member\Views\" />
   </ItemGroup>
 
 </Project>
