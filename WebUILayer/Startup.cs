@@ -63,7 +63,14 @@ namespace WebUILayer
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                  name: "areas",
+                  name: "admin",
+                  pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                );
+            });
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                  name: "member",
                   pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
                 );
             });

@@ -44,7 +44,7 @@ namespace WebUILayer.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Index", "Home", new { area = "Member" });
+                        return RedirectToAction("Index", "Home", new { area = "Admin" });
                     }
                 }
                 else
