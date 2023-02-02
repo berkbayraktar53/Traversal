@@ -1,5 +1,6 @@
-﻿using CoreLayer.EntityLayer.Abstract;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
+using CoreLayer.EntityLayer.Abstract;
 
 namespace EntityLayer.Concrete
 {
@@ -9,5 +10,9 @@ namespace EntityLayer.Concrete
         public string NameSurname { get; set; }
         public string AboutUser { get; set; }
         public bool Status { get; set; }
+
+        #region Table relationship
+        public List<Reservation> Reservations { get; set; }
+        #endregion
     }
 }

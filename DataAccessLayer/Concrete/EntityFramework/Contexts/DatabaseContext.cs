@@ -18,5 +18,6 @@ namespace DataAccessLayer.Concrete.EntityFramework.Contexts
         public DbSet<Destination> Destinations { get; set; }
         public DbSet<Guide> Guides { get; set; }
         public DbSet<Newsletter> Newsletters { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
     }
 }

@@ -18,6 +18,7 @@ namespace EntityLayer.Concrete
 
         #region Table relationship
         public List<Comment> Comments { get; set; }
+        public List<Reservation> Reservations { get; set; }
         #endregion
     }
 }

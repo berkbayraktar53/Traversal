@@ -93,5 +93,12 @@ namespace WebUILayer.Controllers
             }
             return View(userRegisterDto);
         }
+
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            _notyfService.Success("Çıkış yapıldı");
+            return RedirectToAction("Login", "Auth");
+        }
     }
 }

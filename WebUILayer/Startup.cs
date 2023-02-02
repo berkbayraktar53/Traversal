@@ -29,18 +29,18 @@ namespace WebUILayer
                 .AddErrorDescriber<CustomIdentityValidator>()
                 .AddEntityFrameworkStores<DatabaseContext>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
-            services.AddNotyf(cfg =>
-            {
-                cfg.DurationInSeconds = 5;
-                cfg.IsDismissable = true;
-                cfg.Position = NotyfPosition.BottomRight;
-            });
             services.AddMvc(config =>
             {
                 var policy = new AuthorizationPolicyBuilder()
                 .RequireAuthenticatedUser()
                 .Build();
                 config.Filters.Add(new AuthorizeFilter(policy));
+            });
+            services.AddNotyf(cfg =>
+            {
+                cfg.DurationInSeconds = 5;
+                cfg.IsDismissable = true;
+                cfg.Position = NotyfPosition.TopRight;
             });
         }
 
