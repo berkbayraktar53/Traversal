@@ -1,0 +1,65 @@
+﻿@model Destination
+@{
+    ViewData["Title"] = "Rota Detayı";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-xxl">
+    <div class="card mb-4">
+        <div class="card-header text-center">
+            <h4 class="mb-0">Rota Detayı</h4>
+        </div>
+        <div class="card-body">
+            <form>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Görsel</label>
+                    <div class="col-sm-4">
+                        <img src="~/images/destination/@Model.Image" class="img-center" />
+                    </div>
+                    <label class="col-sm-2 col-form-label">Durum</label>
+                    <div class="col-sm-4">
+                        @if (Model.Status == true)
+                        {
+                            <input class="form-control" disabled value="Aktif" />
+                        }
+                        else
+                        {
+                            <input class="form-control" disabled value="Pasif" />
+                        }
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Rota</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" disabled asp-for="City" />
+                    </div>
+                    <label class="col-sm-2 col-form-label">Fiyat</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" disabled value="@Model.Price ₺" />
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Gün Gece</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" disabled asp-for="DayNight" />
+                    </div>
+                    <label class="col-sm-2 col-form-label">Kapaiste</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" disabled asp-for="Capacity" />
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Açıklama</label>
+                    <div class="col-sm-10">
+                        <textarea class="form-control" rows="3" disabled asp-for="Description"></textarea>
+                    </div>
+                </div>
+                <div class="row justify-content-end text-center">
+                    <div class="col-sm-12">
+                        <a class="btn btn-primary" style="color:white" onclick="window.history.back()">Geri Dön</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,5 @@
-﻿using EntityLayer.Concrete;
+﻿using System.Linq;
+using EntityLayer.Concrete;
 using BusinessLayer.Abstract;
 using DataAccessLayer.Abstract;
 using System.Collections.Generic;
@@ -14,9 +15,51 @@ namespace BusinessLayer.Concrete
             _destinationDal = destinationDal;
         }
 
+        public void Add(Destination destination)
+        {
+            _destinationDal.Add(destination);
+        }
+
+        public Destination ChangeStatus(int id)
+        {
+            var values = _destinationDal.Get(p => p.Id == id);
+            if (values.Status == true)
+            {
+                values.Status = false;
+                Update(values);
+                return values;
+            }
+            else
+            {
+                values.Status = true;
+                Update(values);
+                return values;
+            }
+        }
+
+        public void Delete(Destination destination)
+        {
+            _destinationDal.Delete(destination);
+        }
+
+        public Destination GetById(int id)
+        {
+            return _destinationDal.Get(p => p.Id == id);
+        }
+
+        public List<Destination> GetList()
+        {
+            return _destinationDal.GetList().OrderByDescending(p => p.Id).ToList();
+        }
+
         public List<Destination> GetListByActiveStatus()
         {
             return _destinationDal.GetList(p => p.Status == true);
+        }
+
+        public void Update(Destination destination)
+        {
+            _destinationDal.Update(destination);
         }
     }
 }
