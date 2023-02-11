@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-wrapper">
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h5 class="pb-1 mb-4">Excel Listesi İndir</h5>
+        <div class="row mb-5">
+            <div class="col-md-6 col-lg-4">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Tur Rotaları</h5>
+                        <p class="card-text">Tur rota listesini excel formatında indir</p>
+                        <a href="/Admin/Excel/DestinationExcelReport" class="btn btn-primary">İndir</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-backdrop fade"></div>
+</div>
