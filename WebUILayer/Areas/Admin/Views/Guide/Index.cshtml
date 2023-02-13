@@ -1,0 +1,71 @@
+﻿@model IPagedList<Guide>
+@{
+    ViewData["Title"] = "Rehberler";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <h4 class="card-header text-center">
+        <label class="labelClass">Toplam @ViewBag.totalCount Rehber</label>
+        Rehber Listesi
+        <a href="/Admin/Guide/Add" class="tableButton btn btn-success"><i class="tf-icons mb-1 bx bx-plus-circle"></i> Ekle</a>
+        <a href="/Admin/Guide/GuideExcelList" class="tableButton btn btn-primary"><i class="tf-icons mb-1 bx bxs-download"></i> Excel</a>
+    </h4>
+    <div class="table-responsive text-nowrap">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Resim</th>
+                    <th>Ad Soyad</th>
+                    <th>Açıklama</th>
+                    <th>İnstagram Link</th>
+                    <th>Twitter Link</th>
+                    <th>Durum</th>
+                </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+                @foreach (var guide in Model)
+                {
+                    <tr>
+                        <td>
+                            <img src="~/images/guide/@guide.GuideImage" height="40" width="40" class="rounded-circle" />
+                        </td>
+                        <td>@guide.NameSurname</td>
+                        <td>@guide.Description</td>
+                        <td>@guide.InstagramLink</td>
+                        <td>@guide.TwitterLink</td>
+                        <td>
+                            @if (guide.Status == true)
+                            {
+                                <span class="badge bg-label-success me-1">Aktif</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-label-danger me-1">Pasif</span>
+                            }
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="/Admin/Guide/ChangeStatus/@guide.Id"><i class="bx bx-recycle me-1"></i>Durum Değiştir</a>
+                                    <a class="dropdown-item" href="/Admin/Guide/Edit/@guide.Id"><i class="bx bx-edit me-1"></i>Düzenle</a>
+                                    <a class="dropdown-item" href="/Admin/Guide/Delete/@guide.Id" onclick="return confirm('Rehber silinecek. Onaylıyor musun?')"><i class="bx bx-trash me-1"></i>Sil</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div style="display:flex;justify-content:center;">
+        @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }),
+        new PagedListRenderOptions {
+        LiElementClasses = new string[] { "page-item" },
+        PageClasses = new string[] { "page-link" }
+        })
+    </div>
+</div>

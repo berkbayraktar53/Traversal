@@ -1,0 +1,66 @@
+﻿@model GuideListDto
+@{
+    ViewData["Title"] = "Rehber Düzenle";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-xxl">
+    <div class="card mb-4">
+        <div class="card-header text-center">
+            <h4 class="mb-0">Rehber Düzenle</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Resim</label>
+                    <div class="col-sm-4">
+                        <img src="~/images/guide/user.png" height="40" width="40" class="rounded-circle img-center" id="pictureShown" />
+                    </div>
+                    <label class="col-sm-2 col-form-label">Resim</label>
+                    <div class="col-sm-4">
+                        <input type="file" asp-for="Image" class="form-control" id="guideImage" />
+                        <span asp-validation-for="Image" class="spanClass"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Ad Soyad</label>
+                    <div class="col-sm-4">
+                        <input asp-for="NameSurname" type="text" class="form-control" autocomplete="off" />
+                        <span asp-validation-for="NameSurname" class="spanClass"></span>
+                    </div>
+                    <label class="col-sm-2 col-form-label">Açıklama</label>
+                    <div class="col-sm-4">
+                        <input asp-for="Description" type="text" class="form-control" autocomplete="off" />
+                        <span asp-validation-for="Description" class="spanClass"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">İnstagram Link</label>
+                    <div class="col-sm-4">
+                        <input asp-for="InstagramLink" type="text" class="form-control" autocomplete="off" />
+                        <span asp-validation-for="InstagramLink" class="spanClass"></span>
+                    </div>
+                    <label class="col-sm-2 col-form-label">Twitter Link</label>
+                    <div class="col-sm-4">
+                        <input asp-for="TwitterLink" type="text" class="form-control" autocomplete="off" />
+                        <span asp-validation-for="TwitterLink" class="spanClass"></span>
+                    </div>
+                </div>
+                <div class="row justify-content-end text-center">
+                    <div class="col-sm-12">
+                        <button type="submit" class="btn btn-success">Güncelle</button>
+                        <a class="btn btn-primary" style="color:white" href="/Admin/Guide/Index">Geri Dön</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="~/templates/admin/assets/vendor/libs/jquery/jquery.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#guideImage").change(function (e) {
+            $("#pictureShown").attr('src', URL.createObjectURL(e.target.files[0]));
+        });
+    });
+</script>
