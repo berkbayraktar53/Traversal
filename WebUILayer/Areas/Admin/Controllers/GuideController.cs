@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using X.PagedList;
+using OfficeOpenXml;
 using EntityLayer.Dtos;
 using EntityLayer.Concrete;
 using BusinessLayer.Abstract;
@@ -8,10 +9,6 @@ using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using AspNetCoreHero.ToastNotification.Abstractions;
 using BusinessLayer.ValidationRules.FluentValidation;
-using ClosedXML.Excel;
-using System.Collections.Generic;
-using WebUILayer.Models;
-using OfficeOpenXml;
 
 namespace WebUILayer.Areas.Admin.Controllers
 {
@@ -175,7 +172,7 @@ namespace WebUILayer.Areas.Admin.Controllers
             foreach (var item in _guideService.GetList())
             {
                 workSheet.Cells[rowCount, 1].Value = count++;
-                workSheet.Cells[rowCount, 2].Value = item.GuideImage;
+                workSheet.Cells[rowCount, 2].Value = "/images/guide/" + item.GuideImage;
                 workSheet.Cells[rowCount, 3].Value = item.NameSurname;
                 workSheet.Cells[rowCount, 4].Value = item.Description;
                 workSheet.Cells[rowCount, 5].Value = item.InstagramLink;

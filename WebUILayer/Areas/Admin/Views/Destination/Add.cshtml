@@ -1,4 +1,4 @@
-﻿@model Destination
+﻿@model DestinationListDto
 @{
     ViewData["Title"] = "Rota Ekle";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -14,34 +14,35 @@
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">Görsel</label>
                     <div class="col-sm-4">
-                        <img class="img-center" id="pictureShown" />
+                        <img src="~/images/destination/destination.png" class="rounded-circle img-center" height="40" width="40" id="pictureShown" />
                     </div>
-                    <label class="col-sm-2 col-form-label">Resim</label>
+                    <label class="col-sm-2 col-form-label">Resim Seç</label>
                     <div class="col-sm-4">
-                        <input type="file" class="form-control" id="destinationImage" asp-for="Image" />
+                        <input type="file" asp-for="DestinationImage" class="form-control" id="destinationImage" />
+                        <span asp-validation-for="DestinationImage" class="spanClass"></span>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">Rota</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="name" asp-for="City" />
+                        <input type="text" class="form-control" id="name" asp-for="City" autocomplete="off" />
                         <span class="spanClass" asp-validation-for="City"></span>
                     </div>
                     <label class="col-sm-2 col-form-label">Fiyat</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="price" asp-for="Price" />
+                        <input type="text" class="form-control" id="price" asp-for="Price" autocomplete="off" />
                         <span class="spanClass" asp-validation-for="Price"></span>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">Gün Gece</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" asp-for="DayNight" />
+                        <input type="text" class="form-control" asp-for="DayNight" autocomplete="off" />
                         <span class="spanClass" asp-validation-for="DayNight"></span>
                     </div>
                     <label class="col-sm-2 col-form-label">Kapasite</label>
                     <div class="col-sm-4">
-                        <input type="number" class="form-control" id="capacity" asp-for="Capacity" />
+                        <input type="number" class="form-control" id="capacity" asp-for="Capacity" autocomplete="off" />
                         <span class="spanClass" asp-validation-for="Capacity"></span>
                     </div>
                 </div>
@@ -55,7 +56,7 @@
                 <div class="row justify-content-end text-center">
                     <div class="col-sm-12">
                         <button type="submit" class="btn btn-success">Ekle</button>
-                        <a class="btn btn-primary" style="color:white" onclick="window.history.back()">Geri Dön</a>
+                        <a class="btn btn-primary" style="color:white" href="/Admin/Destination/Index">Geri Dön</a>
                     </div>
                 </div>
             </form>

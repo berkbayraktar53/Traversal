@@ -1,4 +1,4 @@
-﻿@model Destination
+﻿@model DestinationListDto
 @{
     ViewData["Title"] = "Rota Düzenle";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -12,13 +12,14 @@
         <div class="card-body">
             <form asp-action="Edit" method="post" enctype="multipart/form-data">
                 <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label">Görsel</label>
-                    <div class="col-sm-4">
-                        <img src="~/images/destination/@Model.Image" class="img-center" id="pictureShown" />
-                    </div>
                     <label class="col-sm-2 col-form-label">Resim</label>
                     <div class="col-sm-4">
-                        <input type="file" class="form-control" id="destinationImage" asp-for="Image" />
+                        <img src="~/images/destination/destination.png" height="40" width="40" class="rounded-circle img-center" id="pictureShown" />
+                    </div>
+                    <label class="col-sm-2 col-form-label">Resim Seç</label>
+                    <div class="col-sm-4">
+                        <input type="file" class="form-control" id="destinationImage" asp-for="DestinationImage" />
+                        <span asp-validation-for="DestinationImage" class="spanClass"></span>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -54,8 +55,8 @@
                 </div>
                 <div class="row justify-content-end text-center">
                     <div class="col-sm-12">
-                        <button type="submit" class="btn btn-warning">Güncelle</button>
-                        <a class="btn btn-primary" style="color:white" onclick="window.history.back()">Geri Dön</a>
+                        <button type="submit" class="btn btn-success">Güncelle</button>
+                        <a class="btn btn-primary" style="color:white" href="/Admin/Destination/Index">Geri Dön</a>
                     </div>
                 </div>
             </form>

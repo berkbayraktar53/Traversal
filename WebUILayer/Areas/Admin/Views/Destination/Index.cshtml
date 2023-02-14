@@ -5,7 +5,12 @@
 }
 
 <div class="card">
-    <h4 class="card-header text-center">Rota Listesi<a href="/Admin/Destination/Add" class="btn btn-primary" style="float:right; color: white;">Ekle</a></h4>
+    <h4 class="card-header text-center">
+        <label class="labelClass">Toplam @ViewBag.totalCount Rota</label>
+        Rotalar
+        <a href="/Admin/Destination/Add" class="tableButton btn btn-success"><i class="tf-icons mb-1 bx bx-plus-circle"></i> Ekle</a>
+        <a href="/Admin/Destination/DestinationExcelList" class="tableButton btn btn-info"><i class="tf-icons mb-1 bx bxs-download"></i> Excel</a>
+    </h4>
     <div class="table-responsive text-nowrap">
         <table class="table table-hover">
             <thead>
@@ -29,16 +34,16 @@
                         <td>@destination.City</td>
                         <td>@destination.DayNight</td>
                         <td>@destination.Capacity</td>
-                        <td>@destination.Price</td>
-                        <td>@destination.Date.ToShortDateString()</td>
+                        <td>@String.Format("{0:n}", @destination.Price) ₺</td>
+                        <td>@destination.Date.ToString("dd/MM/yyyy dddd")</td>
                         <td>
                             @if (destination.Status == true)
                             {
-                                <a href="/Admin/Destination/ChangeStatus/@destination.Id" class="badge bg-label-success me-1">Aktif</a>
+                                <span class="badge bg-label-success me-1">Aktif</span>
                             }
                             else
                             {
-                                <a href="/Admin/Destination/ChangeStatus/@destination.Id" class="badge bg-label-danger me-1">Pasif</a>
+                                <span class="badge bg-label-danger me-1">Pasif</span>
                             }
                         </td>
                         <td>
@@ -47,9 +52,9 @@
                                     <i class="bx bx-dots-vertical-rounded"></i>
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="/Admin/Destination/Detail/@destination.Id"><i class="bx bx-detail me-1"></i> Detay</a>
-                                    <a class="dropdown-item" href="/Admin/Destination/Edit/@destination.Id"><i class="bx bx-edit me-1"></i> Düzenle</a>
-                                    <a class="dropdown-item" href="/Admin/Destination/Delete/@destination.Id"><i class="bx bx-trash me-1"></i> Sil</a>
+                                    <a class="dropdown-item" href="/Admin/Destination/ChangeStatus/@destination.Id"><i class="bx bx-recycle me-1"></i>Durum Değiştir</a>
+                                    <a class="dropdown-item" href="/Admin/Destination/Edit/@destination.Id"><i class="bx bx-edit me-1"></i>Düzenle</a>
+                                    <a class="dropdown-item" href="/Admin/Destination/Delete/@destination.Id" onclick="return confirm('Rota silinecek. Onaylıyor musun?')"><i class="bx bx-trash me-1"></i>Sil</a>
                                 </div>
                             </div>
                         </td>
