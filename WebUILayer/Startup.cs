@@ -28,6 +28,7 @@ namespace WebUILayer
                 .AddEntityFrameworkStores<DatabaseContext>()
                 .AddErrorDescriber<CustomIdentityValidator>()
                 .AddEntityFrameworkStores<DatabaseContext>();
+            services.AddHttpClient();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddMvc(config =>
             {
