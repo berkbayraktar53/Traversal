@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IPagedList<Destination>
+@{
     ViewData["Title"] = "Rotalar";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -14,128 +15,38 @@
         </div>
     </div>
 </section>
-<section class="grids-1 py-5">
+<section class="grids-1">
     <div class="grids py-lg-5 py-md-4">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-4 col-6">
-                    <div class="column">
-                        <a href="blog-single.html"><img src="~/templates/traversal/assets/images/g1.jpg" alt="" class="img-fluid"></a>
-                        <div class="info">
-                            <h4><a href="blog-single.html">Paris</a></h4>
-                            <p>3Days, 4 Nights </p>
-                            <div class="dst-btm">
-                                <h6 class="">Start From </h6>
-                                <span>$1750</span>
+                @foreach (var destination in Model)
+                {
+                    <div class="col-lg-4 col-md-4 col-6 mt-lg-5 mt-4">
+                        <div class="column">
+                            <a href="blog-single.html"><img src="~/images/destination/@destination.Image" alt="resim bulunamadı" class="img-fluid"></a>
+                            <div class="info">
+                                <h4><a href="blog-single.html">@destination.City</a></h4>
+                                <p>@destination.DayNight</p>
+                                <div class="dst-btm">
+                                    <h6 class="">Tarih</h6>
+                                    <span style="color:#777777">@destination.Date.ToString("dd MMM yyyy")</span>
+                                </div>
+                                <div class="dst-btm">
+                                    <h6 class="">Fiyat</h6>
+                                    <span style="color:#777777">@String.Format("{0:n}", @destination.Price) ₺</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-6 mt-md-0">
-                    <div class="column">
-                        <a href="blog-single.html"><img src="~/templates/traversal/assets/images/g2.jpg" alt="" class="img-fluid"></a>
-                        <div class="info">
-                            <h4><a href="blog-single.html">Bankok</a></h4>
-                            <p>3Days, 4 Nights </p>
-                            <div class="dst-btm">
-                                <h6 class="">Start From </h6>
-                                <span>$1690</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-6 mt-md-0 mt-4">
-                    <div class="column">
-                        <a href="blog-single.html"><img src="~/templates/traversal/assets/images/g3.jpg" alt="" class="img-fluid"></a>
-                        <div class="info">
-                            <h4><a href="blog-single.html">Maldives</a></h4>
-                            <p>3Days, 4 Nights </p>
-                            <div class="dst-btm">
-                                <h6 class="">Start From </h6>
-                                <span>$1650</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-6 mt-lg-5 mt-4">
-                    <div class="column">
-                        <a href="blog-single.html"><img src="~/templates/traversal/assets/images/g4.jpg" alt="" class="img-fluid"></a>
-                        <div class="info">
-                            <h4><a href="blog-single.html">Greece</a></h4>
-                            <p>3Days, 4 Nights</p>
-                            <div class="dst-btm">
-                                <h6 class=""> Start From </h6>
-                                <span>$1950</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-6 mt-lg-5 mt-4">
-                    <div class="column">
-                        <a href="blog-single.html"><img src="~/templates/traversal/assets/images/g5.jpg" alt="" class="img-fluid"></a>
-                        <div class="info">
-                            <h4><a href="blog-single.html">London</a></h4>
-                            <p>3Days, 4 Nights</p>
-                            <div class="dst-btm">
-                                <h6 class=""> Start From </h6>
-                                <span>$1850</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-6 mt-lg-5 mt-4">
-                    <div class="column">
-                        <a href="blog-single.html"><img src="~/templates/traversal/assets/images/g6.jpg" alt="" class="img-fluid"></a>
-                        <div class="info">
-                            <h4><a href="blog-single.html">Julian Alps</a></h4>
-                            <p>3Days, 4 Nights</p>
-                            <div class="dst-btm">
-                                <h6 class=""> Start From </h6>
-                                <span>$1750</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-6 mt-lg-5 mt-4">
-                    <div class="column">
-                        <a href="blog-single.html"><img src="~/templates/traversal/assets/images/g7.jpg" alt="" class="img-fluid"></a>
-                        <div class="info">
-                            <h4><a href="blog-single.html">Thailand</a></h4>
-                            <p>3Days, 4 Nights</p>
-                            <div class="dst-btm">
-                                <h6 class=""> Start From </h6>
-                                <span>$1650</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-6 mt-lg-5 mt-4">
-                    <div class="column">
-                        <a href="blog-single.html"><img src="~/templates/traversal/assets/images/g8.jpg" alt="" class="img-fluid"></a>
-                        <div class="info">
-                            <h4><a href="blog-single.html">Singapore</a></h4>
-                            <p>3Days, 4 Nights</p>
-                            <div class="dst-btm">
-                                <h6 class=""> Start From </h6>
-                                <span>$1950</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-6 mt-lg-5 mt-4">
-                    <div class="column">
-                        <a href="blog-single.html"><img src="~/templates/traversal/assets/images/g9.jpg" alt="" class="img-fluid"></a>
-                        <div class="info">
-                            <h4><a href="blog-single.html">Egypt</a></h4>
-                            <p>3Days, 4 Nights</p>
-                            <div class="dst-btm">
-                                <h6 class=""> Start From </h6>
-                                <span>$1450</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                }
             </div>
+        </div>
+        <div style="display:flex;justify-content:center;">
+            @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }),
+            new PagedListRenderOptions {
+            LiElementClasses = new string[] { "page-item" },
+            PageClasses = new string[] { "page-link" }
+            })
         </div>
     </div>
 </section>

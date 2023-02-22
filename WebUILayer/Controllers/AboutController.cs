@@ -1,8 +1,10 @@
 ﻿using BusinessLayer.Abstract;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebUILayer.Controllers
 {
+    [AllowAnonymous]
     public class AboutController : Controller
     {
         private readonly IAboutService _aboutService;

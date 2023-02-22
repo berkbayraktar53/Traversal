@@ -16475,7 +16475,7 @@ ul.breadcrumbs-custom-path li a {
         }
 
             .w3l-team .box16 .social li a.facebook {
-                background: #3b5998;
+                background: #FF2845;
             }
 
             .w3l-team .box16 .social li a.twitter {
@@ -17768,4 +17768,10 @@ h4.side-title {
     .w3l-footer .subscribe button {
         width: 20%;
     }
+}
+
+.spanColor {
+    color: red;
+    font-size: 15px;
+    padding-left: 21px;
 }

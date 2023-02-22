@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Contact
+@{
     ViewData["Title"] = "İletişim";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -37,23 +38,27 @@
                     </div>
                 </div>
                 <div class="col-lg-6 mt-lg-0 mt-5 contact-right">
-                    <form class="signin-form" asp-action="Index" method="post">
+                    <form asp-action="Index" class="signin-form" method="post">
                         <div class="input-grids">
                             <div class="form-group">
-                                <input type="text" name="NameSurname" placeholder="Ad Soyad" />
+                                <input asp-for="NameSurname" type="text" autocomplete="off" placeholder="Ad Soyad" />
+                                <span asp-validation-for="NameSurname" class="spanColor"></span>
                             </div>
                             <div class="form-group">
-                                <input type="email" name="Email" placeholder="Email" />
+                                <input asp-for="Email" type="email" autocomplete="off" placeholder="Email" />
+                                <span asp-validation-for="Email" class="spanColor"></span>
                             </div>
                             <div class="form-group">
-                                <input type="text" name="Subject" placeholder="Konu" />
+                                <input asp-for="Subject" type="text" autocomplete="off" placeholder="Konu" />
+                                <span asp-validation-for="Subject" class="spanColor"></span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <textarea name="Message" placeholder="Mesaj"></textarea>
+                            <textarea asp-for="Message" autocomplete="off" placeholder="Mesaj"></textarea>
+                            <span asp-validation-for="Message" class="spanColor"></span>
                         </div>
                         <div class="text-right">
-                            <button class="btn btn-style btn-primary">Gönder</button>
+                            <button type="submit" class="btn btn-style btn-primary">Gönder</button>
                         </div>
                     </form>
                 </div>

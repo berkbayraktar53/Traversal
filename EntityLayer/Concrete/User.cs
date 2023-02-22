@@ -12,6 +12,7 @@ namespace EntityLayer.Concrete
         public bool Status { get; set; }
 
         #region Table relationship
+        public List<Comment> Comments { get; set; }
         public List<Reservation> Reservations { get; set; }
         #endregion
     }

@@ -12,5 +12,6 @@ namespace BusinessLayer.Abstract
         Destination ChangeStatus(int id);
         List<Destination> GetList();
         List<Destination> GetListByActiveStatus();
+        List<Destination> GetEightDestinationByActiveStatus();
     }
 }
