@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.DependencyInjection;
+using WebUILayer.CQRS.Handlers.DestinationHandlers;
 using DataAccessLayer.Concrete.EntityFramework.Contexts;
 
 namespace WebUILayer
@@ -23,6 +24,11 @@ namespace WebUILayer
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<GetAllDestinationQueryHandler>();
+            services.AddScoped<GetDestinationByIdQueryHandler>();
+            services.AddScoped<CreateDestinationCommandHandler>();
+            services.AddScoped<DeleteDestinationCommandHandler>();
+            services.AddScoped<UpdateDestinationCommandHandler>();
             services.AddDbContext<DatabaseContext>();
             services.AddIdentity<User, Role>()
                 .AddEntityFrameworkStores<DatabaseContext>()
