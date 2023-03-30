@@ -1,3 +1,4 @@
+using MediatR;
 using WebUILayer.Models;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Builder;
@@ -29,6 +30,9 @@ namespace WebUILayer
             services.AddScoped<CreateDestinationCommandHandler>();
             services.AddScoped<DeleteDestinationCommandHandler>();
             services.AddScoped<UpdateDestinationCommandHandler>();
+
+            services.AddMediatR(typeof(Startup));
+
             services.AddDbContext<DatabaseContext>();
             services.AddIdentity<User, Role>()
                 .AddEntityFrameworkStores<DatabaseContext>()
