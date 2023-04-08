@@ -1,3 +1,5 @@
+using SignalR.API.Models;
+using SignalR.API.Hubs;
 using SignalR.API.Contexts;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Builder;
@@ -20,6 +22,12 @@ namespace SignalR.API
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<VisitorService>();
+            services.AddSignalR();
+            services.AddCors(options => options.AddPolicy("CorsPolicy", builder =>
+            {
+                builder.AllowAnyHeader().AllowAnyMethod().SetIsOriginAllowed((host) => true).AllowCredentials();
+            }));
             services.AddEntityFrameworkNpgsql().AddDbContext<DatabaseContext>(options =>
             {
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
@@ -41,9 +49,11 @@ namespace SignalR.API
             }
             app.UseRouting();
             app.UseAuthorization();
+            app.UseCors("CorsPolicy");
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<VisitorHub>("/VisitorHub");
             });
         }
     }
