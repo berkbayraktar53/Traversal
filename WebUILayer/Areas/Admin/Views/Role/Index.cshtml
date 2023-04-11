@@ -1,0 +1,54 @@
+﻿@model IPagedList<Role>
+@{
+    ViewData["Title"] = "Rol Listesi";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <h4 class="card-header text-center">
+        <label class="labelClass">Toplam Rol Sayısı: @ViewBag.totalRoleCount</label>
+        Rol Listesi
+        <a href="/Admin/Role/Add" class="tableButton btn btn-success"><i class="tf-icons mb-1 bx bx-plus-circle"></i> Ekle</a>
+        <a href="/Admin/Role/RoleExcelList" class="tableButton btn btn-info"><i class="tf-icons mb-1 bx bxs-download"></i> Excel</a>
+    </h4>
+    <div class="table-responsive text-nowrap">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Rol Adı</th>
+                    <th>Rol Açıklaması</th>
+                    <th>Durum</th>
+                    <th>Düzenle</th>
+                    <th>Sil</th>
+                </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+                @foreach (var role in Model)
+                {
+                    <tr>
+                        <td>@role.Name</td>
+                        <td>@role.Description</td>
+                        @if (role.Status == true)
+                        {
+                            <td><a class="badge bg-label-success me-1" href="/Admin/Role/ChangeStatus/@role.Id">Aktif</a></td>
+                        }
+                        else
+                        {
+                            <td><a class="badge bg-label-danger me-1" href="/Admin/Role/ChangeStatus/@role.Id">Pasif</a></td>
+                        }
+                        <td><a class="badge bg-label-warning me-1" href="/Admin/Role/Edit/@role.Id">Düzenle</a></td>
+                        <td><a class="badge bg-label-danger me-1" href="/Admin/Role/Delete/@role.Id" onclick="return confirm('Rol silinecek. Onaylıyor musun?')">Sil</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<br />
+<div style="display:flex;justify-content:center;margin-right:60px;">
+    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }),
+    new PagedListRenderOptions {
+    LiElementClasses = new string[] { "page-item" },
+    PageClasses = new string[] { "page-link" }
+    })
+</div>

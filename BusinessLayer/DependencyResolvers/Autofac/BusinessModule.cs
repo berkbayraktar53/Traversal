@@ -34,6 +34,9 @@ namespace BusinessLayer.DependencyResolvers.Autofac
             builder.RegisterType<ReservationManager>().As<IReservationService>();
             builder.RegisterType<EfReservationDal>().As<IReservationDal>();
 
+            builder.RegisterType<RoleManager>().As<IRoleService>();
+            builder.RegisterType<EfRoleDal>().As<IRoleDal>();
+
             builder.RegisterType<UserManager>().As<IUserService>();
             builder.RegisterType<EfUserDal>().As<IUserDal>();
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using X.PagedList;
+using OfficeOpenXml;
 using EntityLayer.Dtos;
 using EntityLayer.Concrete;
 using BusinessLayer.Abstract;
@@ -8,7 +9,6 @@ using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using AspNetCoreHero.ToastNotification.Abstractions;
 using BusinessLayer.ValidationRules.FluentValidation;
-using OfficeOpenXml;
 
 namespace WebUILayer.Areas.Admin.Controllers
 {

@@ -1,0 +1,66 @@
+﻿@model User
+@{
+    ViewData["Title"] = "Kullanıcı Detayı";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-xxl">
+    <div class="card mb-4">
+        <div class="card-header text-center">
+            <h4 class="mb-0">Kullanıcı Detayı</h4>
+        </div>
+        <div class="card-body">
+            <form>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Görsel</label>
+                    <div class="col-sm-4">
+                        @if (Model.UserImage == null)
+                        {
+                            <img src="~/memberimages/user.png" class="img-center" />
+                        }
+                        else
+                        {
+                            <img src="~/memberimages/@Model.UserImage" class="img-center" />
+                        }
+                    </div>
+                    <label class="col-sm-2 col-form-label">Durum</label>
+                    <div class="col-sm-4">
+                        @if (Model.Status == true)
+                        {
+                            <input class="form-control" disabled value="Aktif" />
+                        }
+                        else
+                        {
+                            <input class="form-control" disabled value="Pasif" />
+                        }
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Adı Soyadı</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" disabled asp-for="NameSurname" />
+                    </div>
+                    <label class="col-sm-2 col-form-label">Hakkında</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" disabled value="@Model.AboutUser" />
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Kullanıcı Adı</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" disabled asp-for="UserName" />
+                    </div>
+                    <label class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" disabled asp-for="Email" />
+                    </div>
+                </div>
+                <div class="row justify-content-end text-center">
+                    <div class="col-sm-12">
+                        <a class="btn btn-primary" style="color:white" onclick="window.history.back()">Geri Dön</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
