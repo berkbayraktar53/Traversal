@@ -1,39 +1,9 @@
-﻿<footer class="footer pt-3">
-    <div class="container-fluid">
-        <div class="row align-items-center justify-content-lg-between">
-            @*<div class="col-lg-6 mb-lg-0 mb-4">
-                <div class="copyright text-center text-sm text-muted text-lg-start">
-                    © <script>
-                          document.write(new Date().getFullYear())
-                    </script>
-                    Traversal - Tüm Hakları Saklıdır
-                </div>
-            </div>*@
-            <div class="col-lg-12">
-                <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                    <li class="nav-item">
-                        <a href="/Member" class="nav-link text-muted">Anasayfa</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/Member/Profile/Index" class="nav-link text-muted">Profil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/Member/Message/Index" class="nav-link text-muted">Mesajlar</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/Member/Comment/Index" class="nav-link text-muted">Yorumlar</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/Member/Reservation/Index" class="nav-link text-muted">Rezervasyonlar</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="~/" class="nav-link text-muted" target="_blank">Siteye Git</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/Auth/Logout" class="nav-link pe-0 text-muted" target="_blank">Çıkış Yap</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+﻿<footer class="footer footer-static footer-light navbar-border navbar-shadow">
+    <div class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2">
+        <span class="float-md-left d-block d-md-inline-block">© @DateTime.Now.Year Traversal - Tüm Hakları Saklıdır</span>
+        <ul class="list-inline float-md-right d-block d-md-inline-blockd-none d-lg-block mb-0">
+            <li class="list-inline-item"><a class="my-1" href="~/" target="_blank">Siteye Git</a></li>
+            <li class="list-inline-item"><a class="my-1" href="/Auth/Logout">Çıkış Yap</a></li>
+        </ul>
     </div>
 </footer>

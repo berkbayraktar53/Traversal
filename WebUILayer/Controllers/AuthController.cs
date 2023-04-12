@@ -42,9 +42,14 @@ namespace WebUILayer.Controllers
                         _notyfService.Error("Kullanıcı bulunamadı");
                         return RedirectToAction("Login", "Auth");
                     }
-                    else
+                    var getRoles = _userManager.GetRolesAsync(user).Result;
+                    if (getRoles.Contains("Admin"))
                     {
                         return RedirectToAction("Index", "Home", new { area = "Admin" });
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home", new { area = "Member" });
                     }
                 }
                 else
@@ -97,7 +102,6 @@ namespace WebUILayer.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            _notyfService.Success("Çıkış yapıldı");
             return RedirectToAction("Login", "Auth");
         }
     }

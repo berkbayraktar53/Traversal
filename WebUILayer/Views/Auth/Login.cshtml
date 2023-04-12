@@ -32,12 +32,12 @@
                         Hesabına Giriş Yap
                     </span>
                     <div class="wrap-input100">
-                        <input class="input100" type="text" name="Email" placeholder="Email">
-                        <span class="text-danger" asp-validation-for="Email"></span>
+                        <input class="input100" type="text" name="Email" placeholder="Email" autocomplete="off" />
+                        <span class="text-danger ml-4" asp-validation-for="Email"></span>
                     </div>
                     <div class="wrap-input100">
-                        <input class="input100" type="password" name="Password" placeholder="Şifre">
-                        <span class="text-danger" asp-validation-for="Password"></span>
+                        <input class="input100" type="password" name="Password" placeholder="Şifre" autocomplete="off" />
+                        <span class="text-danger ml-4" asp-validation-for="Password"></span>
                     </div>
                     <div class="container-login100-form-btn">
                         <button class="login100-form-btn">
@@ -51,7 +51,7 @@
                     </div>
                     <div class="text-center p-t-12">
                         <a class="txt2" href="/Auth/Register">
-                             Hesap Oluştur
+                            Hesap Oluştur
                         </a>
                     </div>
                 </form>
