@@ -1,0 +1,59 @@
+﻿@model IPagedList<Comment>
+@{
+    ViewData["Title"] = "Yorumlarım";
+    Layout = "~/Areas/Member/Views/Shared/_Layout.cshtml";
+}
+
+<div class="app-content content">
+    <div class="content-wrapper">
+        <div class="content-wrapper-before"></div>
+        <div class="content-header row">
+            <div class="content-header-left col-md-4 col-12 mb-2">
+                <h3 class="content-header-title">Yorumlarım</h3>
+            </div>
+            <div class="content-header-right col-md-8 col-12">
+                <div class="breadcrumbs-top float-md-right">
+                    <div class="breadcrumb-wrapper mr-1">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item active">
+                                Toplam Yorum Sayısı: @Model.TotalItemCount
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-body">
+            <section id="card-headings">
+                <div class="row">
+                    @foreach (var comment in Model)
+                    {
+                        <div class="col-md-6 col-sm-12">
+                            <div class="card text-center">
+                                <div class="card-header">
+                                    <img src="~/images/user/@comment.UserImage" height="40" width="40" />
+                                    @comment.User.NameSurname
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">@comment.Destination.City Turu</h5>
+                                    <p class="card-text">"@comment.CommentContent"</p>
+                                    <a href="/Destination/Detail/@comment.Destination.Id" target="_blank" class="btn btn-primary">Yorumu Gör</a>
+                                </div>
+                                <div class="card-footer text-muted">
+                                    @comment.CommentDate.ToString("dd MMM yyyy") tarihinde yorum yapıldı
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div style="display:flex;justify-content:center">
+                    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }),
+                    new PagedListRenderOptions {
+                    LiElementClasses = new string[] { "page-item" },
+                    PageClasses = new string[] { "page-link" }
+                    })
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

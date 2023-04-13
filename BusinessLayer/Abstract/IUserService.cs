@@ -15,6 +15,7 @@ namespace BusinessLayer.Abstract
         Task<bool> GetRoleExist(User user);
         Task<IEnumerable> GetUserRoles(User user);
         Task<User> GetById(int id);
+        int GetById();
         Task<User> ChangeStatus(int id);
         Task<IdentityResult> AddRole(Task<User> user, string roleName);
         Task<IdentityResult> DeleteRole(Task<User> user, string roleName);

@@ -1,22 +1,25 @@
-﻿using EntityLayer.Dtos;
+﻿using System;
+using System.IO;
+using EntityLayer.Dtos;
 using System.Collections;
 using EntityLayer.Concrete;
 using BusinessLayer.Abstract;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System.IO;
-using System;
 
 namespace BusinessLayer.Concrete
 {
     public class UserManager : IUserService
     {
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly UserManager<User> _userManager;
 
-        public UserManager(UserManager<User> userManager)
+        public UserManager(IHttpContextAccessor httpContextAccessor, UserManager<User> userManager)
         {
+            _httpContextAccessor = httpContextAccessor;
             _userManager = userManager;
         }
 
@@ -77,6 +80,11 @@ namespace BusinessLayer.Concrete
         public async Task<User> GetById(int id)
         {
             return await _userManager.Users.FirstOrDefaultAsync(p => p.Id == id);
+        }
+
+        public int GetById()
+        {
+            return _userManager.FindByNameAsync(_httpContextAccessor.HttpContext.User.Identity.Name).Result.Id;
         }
 
         public async Task<List<User>> GetList()

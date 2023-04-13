@@ -6,5 +6,6 @@ namespace BusinessLayer.Abstract
     public interface ICommentService
     {
         List<Comment> GetListByActiveStatus();
+        List<Comment> GetCommentListWithDestinationAndUserByActiveStatus();
     }
 }

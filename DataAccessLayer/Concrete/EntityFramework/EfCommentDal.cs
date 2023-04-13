@@ -19,7 +19,7 @@ namespace DataAccessLayer.Concrete.EntityFramework
         public List<Comment> GetCommentListWithDestinationAndUser(int id)
         {
             var context = new DatabaseContext();
-            return context.Comments.Where(p => p.Id == id).Include(p => p.Destination).Include(p => p.User).ToList();
+            return context.Comments.Where(p => p.UserId == id).Include(p => p.Destination).Include(p => p.User).ToList();
         }
     }
 }

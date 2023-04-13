@@ -7,18 +7,17 @@ namespace WebUILayer.Areas.Member.Controllers
 {
     [Area("Member")]
     [Authorize(Roles = "Member")]
-    public class CommentController : Controller
+    public class DestinationController : Controller
     {
-        private readonly ICommentService _commentService;
+        private readonly IDestinationService _destinationService;
 
-        public CommentController(ICommentService commentService)
+        public DestinationController(IDestinationService destinationService)
         {
-            _commentService = commentService;
+            _destinationService = destinationService;
         }
-
         public IActionResult Index(int page = 1)
         {
-            var values = _commentService.GetCommentListWithDestinationAndUserByActiveStatus().ToPagedList(page, 2);
+            var values = _destinationService.GetListByActiveStatus().ToPagedList(page, 4);
             return View(values);
         }
     }

@@ -59,7 +59,7 @@ namespace BusinessLayer.Concrete
 
         public List<Destination> GetListByActiveStatus()
         {
-            return _destinationDal.GetList(p => p.Status == true);
+            return _destinationDal.GetList(p => p.Status == true).OrderByDescending(p => p.Date).ToList();
         }
 
         public void Update(Destination destination)
