@@ -1,67 +1,69 @@
-﻿using System;
-using System.IO;
-using EntityLayer.Concrete;
+﻿using EntityLayer.Dtos;
+using BusinessLayer.Abstract;
 using System.Threading.Tasks;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Identity;
-using WebUILayer.Areas.Member.Models;
+using Microsoft.AspNetCore.Authorization;
 using AspNetCoreHero.ToastNotification.Abstractions;
+using BusinessLayer.ValidationRules.FluentValidation;
 
 namespace WebUILayer.Areas.Member.Controllers
 {
-    [Area("Member")]
-    public class ProfileController : Controller
-    {
-        private readonly INotyfService _notyfService;
-        private readonly UserManager<User> _userManager;
+	[Area("Member")]
+	[Authorize(Roles = "Member")]
+	public class ProfileController : Controller
+	{
+		private readonly INotyfService _notyfService;
+		private readonly IUserService _userService;
 
-        public ProfileController(INotyfService notyfService, UserManager<User> userManager)
-        {
-            _notyfService = notyfService;
-            _userManager = userManager;
-        }
+		public ProfileController(INotyfService notyfService, IUserService userService)
+		{
+			_notyfService = notyfService;
+			_userService = userService;
+		}
 
-        [HttpGet]
-        public async Task<IActionResult> Index()
-        {
-            var userValues = await _userManager.FindByNameAsync(User.Identity.Name);
-            MemberEditViewModel memberEditViewModel = new()
-            {
-                NameSurname = userValues.NameSurname,
-                AboutUser = userValues.AboutUser,
-                UserName = userValues.UserName,
-                Email = userValues.Email
-            };
-            return View(memberEditViewModel);
-        }
+		public IActionResult Index()
+		{
+			var values = _userService.GetByUser();
+			return View(values);
+		}
 
-        [HttpPost]
-        public async Task<IActionResult> Index(MemberEditViewModel memberEditViewModel)
-        {
-            var userValues = await _userManager.FindByNameAsync(User.Identity.Name);
-            if (memberEditViewModel.UserImage != null)
-            {
-                var resource = Directory.GetCurrentDirectory();
-                var extension = Path.GetExtension(memberEditViewModel.UserImage.FileName);
-                var imageName = Guid.NewGuid() + extension;
-                var saveLocation = resource + "/wwwroot/memberimages/" + imageName;
-                var stream = new FileStream(saveLocation, FileMode.Create);
-                await memberEditViewModel.UserImage.CopyToAsync(stream);
-                userValues.UserImage = imageName;
-            }
-            userValues.NameSurname = memberEditViewModel.NameSurname;
-            userValues.AboutUser = memberEditViewModel.AboutUser;
-            userValues.UserName = memberEditViewModel.UserName;
-            userValues.Email = memberEditViewModel.Email;
-            userValues.PasswordHash = _userManager.PasswordHasher.HashPassword(userValues, memberEditViewModel.Password);
-            var result = await _userManager.UpdateAsync(userValues);
-            if (result.Succeeded)
-            {
-                _notyfService.Success("Profil güncellendi");
-                return RedirectToAction("Index", "Profile");
-            }
-            _notyfService.Error("Profil güncellenemedi");
-            return View();
-        }
-    }
+		[HttpGet]
+		public IActionResult Edit()
+		{
+			var user = _userService.GetByUser();
+			UserListDto userListDto = new()
+			{
+				Id = user.Id,
+				AboutUser = user.AboutUser,
+				Email = user.Email,
+				NameSurname = user.NameSurname,
+				UserName = user.UserName,
+				Status = user.Status
+			};
+			return View(userListDto);
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Edit(UserListDto userListDto)
+		{
+			UserValidator userValidator = new();
+			ValidationResult validationResult = userValidator.Validate(userListDto);
+			if (validationResult.IsValid)
+			{
+				await _userService.Update(userListDto);
+				_notyfService.Success("Profil güncellendi");
+				return RedirectToAction("Index", "Profile");
+			}
+			else
+			{
+				foreach (var item in validationResult.Errors)
+				{
+					ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+				}
+				_notyfService.Error("Profil güncellenemedi");
+				return View();
+			}
+		}
+	}
 }

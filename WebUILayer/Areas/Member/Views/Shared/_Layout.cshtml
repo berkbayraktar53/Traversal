@@ -7,5 +7,6 @@
     @RenderBody()
     @await Html.PartialAsync("~/Areas/Member/Views/Shared/_LayoutPartial/_FooterPartial.cshtml")
     @await Html.PartialAsync("~/Areas/Member/Views/Shared/_LayoutPartial/_ScriptPartial.cshtml")
+    @await Component.InvokeAsync("Notyf")
 </body>
 </html>
