@@ -5,7 +5,7 @@ namespace BusinessLayer.Abstract
 {
 	public interface IFileService
 	{
-		void FileDelete(string path);
-		Task<string> FileSave(IFormFile file);
+		void DeleteUserPicture(string path);
+		Task<string> AddUserPicture(IFormFile file);
 	}
 }

@@ -1,0 +1,97 @@
+﻿@model IPagedList<Reservation>
+@{
+	ViewData["Title"] = "Aktif Rezervasyon";
+	Layout = "~/Areas/Member/Views/Shared/_Layout.cshtml";
+}
+
+<div class="app-content content">
+	<div class="content-wrapper">
+		<div class="content-wrapper-before"></div>
+		<div class="content-header row">
+			<div class="content-header-left col-md-4 col-12 mb-2">
+				<h3 class="content-header-title">Aktif Rezervasyon</h3>
+			</div>
+			<div class="content-header-right col-md-8 col-12">
+				<div class="breadcrumbs-top float-md-right">
+					<div class="breadcrumb-wrapper mr-1">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item active">
+								Toplam Rezervasyon Sayısı: @Model.TotalItemCount
+							</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="content-body">
+			<section id="header-footer">
+				<div class="row match-height">
+					@if (Model.TotalItemCount > 0)
+					{
+						@foreach (var reservation in Model)
+						{
+							<div class="col-lg-4 col-md-12">
+								<div class="card">
+									<div class="card-body">
+										<h4 class="card-title">@reservation.Destination.City Turu</h4>
+
+										@if (reservation.Description.Length < 30)
+										{
+											<h6 class="card-subtitle text-muted">@reservation.Description | @reservation.PersonCount Kişilik Yer</h6>
+										}
+										else
+										{
+											<h6 class="card-subtitle text-muted">
+												@reservation.Description.Substring(0, @reservation.Description.Substring(0, 30).LastIndexOf(" ")) ... | @reservation.PersonCount Kişilik Yer
+											</h6>
+										}
+									</div>
+									<img class="" src="~/images/destination/@reservation.Destination.Image" height="145" width="323" alt="Resim Bulunamadı">
+									<div class="card-body">
+										@if (reservation.Destination.Description.Length < 130)
+										{
+											<p class="card-text">
+												@reservation.Destination.Description
+											</p>
+										}
+										else
+										{
+											<p class="card-text">
+												@reservation.Destination.Description.Substring(0, @reservation.Destination.Description.Substring(0, 130).LastIndexOf(" ")) ...
+											</p>
+										}
+										<p class="card-text">Fiyat: @String.Format("{0:n}", @reservation.Destination.Price) ₺</p>
+									</div>
+									<div class="card-footer border-top-blue-grey border-top-lighten-5 text-muted">
+										<span class="float-left">@reservation.Date.ToString("dd MMM yyyy")</span>
+										<span class="float-right">
+											<a href="/Destination/Detail/@reservation.Destination.Id" target="_blank" class="card-link">
+												Tur Detayı
+												<i class="la la-angle-right"></i>
+											</a>
+										</span>
+									</div>
+								</div>
+							</div>
+						}
+					}
+					else
+					{
+						<div class="col-lg-12 col-md-12 text-center">
+							<div class="card mt-4">
+								<h3>Aktif Rezervasyon Bulunamadı</h3>
+							</div>
+						</div>
+					}
+				</div>
+				<div style="display:flex;justify-content:center">
+					@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }),
+					new PagedListRenderOptions {
+					LiElementClasses = new string[] { "page-item" },
+					PageClasses = new string[] { "page-link" }
+					})
+				</div>
+			</section>
+		</div>
+	</div>
+</div>

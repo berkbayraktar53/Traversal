@@ -1,43 +1,81 @@
-﻿@{
-    ViewData["Title"] = "Add";
-    Layout = "~/Areas/Member/Views/Shared/_Layout.cshtml";
+﻿@model Reservation
+@{
+	ViewData["Title"] = "Rezervasyon Ekle";
+	Layout = "~/Areas/Member/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container">
-    <div style="text-align:center">
-        <h6 class="font-weight-bolder mb-0">Profil Bilgileri</h6>
-    </div>
-    <form enctype="multipart/form-data" asp-action="Index" method="post">
-        <div class="form-group">
-            <div class="col-lg-4">
-                <label for="example-text-input" class="form-control-label">Profil Resmi</label>
-                <input type="file" />
-            </div>
-            <div class="form-group">
-                <label for="example-text-input" class="form-control-label">Ad Soyad</label>
-                <input class="form-control" type="text" />
-            </div>
-            <div class="form-group">
-                <label for="example-text-input" class="form-control-label">Hakkında</label>
-                <input class="form-control" type="text" />
-            </div>
-            <div class="form-group">
-                <label for="example-text-input" class="form-control-label">Kullanıcı Adı</label>
-                <input class="form-control" type="text" />
-            </div>
-            <div class="form-group">
-                <label for="example-text-input" class="form-control-label">Email</label>
-                <input class="form-control" type="text" />
-            </div>
-            <div class="form-group">
-                <label for="example-password-input" class="form-control-label">Şifre</label>
-                <input class="form-control" required type="password" />
-            </div>
-            <div class="form-group" style="text-align:center">
-                <button class="btn btn-primary" type="submit">Güncelle</button>
-            </div>
-        </div>
-    </form>
+<div class="app-content content">
+	<div class="content-wrapper">
+		<div class="content-wrapper-before"></div>
+		<div class="content-header row">
+			<div class="content-header-left col-md-4 col-12 mb-2">
+				<h3 class="content-header-title">Yeni Rezervasyon</h3>
+			</div>
+			<div class="content-header-right col-md-8 col-12">
+				<div class="breadcrumbs-top float-md-right">
+					<div class="breadcrumb-wrapper mr-1">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item">
+								<a href="/Member/Reservation/MyCurrentReservation">Aktif Rezervasyona Git</a>
+							</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="content-body">
+			<section id="content-types">
+				<div class="row match-height">
+					<div class="col-xl-12 col-md-12">
+						<div class="card">
+							<div class="card-content">
+								<div class="card-body">
+									<h4 class="card-title text-center">Rezervasyon Oluştur</h4>
+								</div>
+								<div class="card-body">
+									<form class="form" asp-action="Add" method="post">
+										<div class="form-body">
+											<div class="form-group row">
+												<label class="col-sm-2 col-form-label">Tur Rotası</label>
+												<div class="col-sm-10">
+													@Html.DropDownListFor(x => x.DestinationId, (List<SelectListItem>)ViewBag.destinationList, new { @class = "form-control" })
+													<span class="text-danger" asp-validation-for="Destination.City"></span>
+												</div>
+											</div>
+											<div class="form-group row">
+												<label class="col-sm-2 col-form-label">Kişi Sayısı</label>
+												<div class="col-sm-10">
+													<input type="text" class="form-control" asp-for="PersonCount" autocomplete="off" />
+													<span class="text-danger" asp-validation-for="PersonCount"></span>
+												</div>
+											</div>
+											<div class="form-group row">
+												<label class="col-sm-2 col-form-label">Rezervasyon Tarihi</label>
+												<div class="col-sm-10">
+													<input type="date" class="form-control" asp-for="Date" autocomplete="off" />
+													<span class="text-danger" asp-validation-for="Date"></span>
+												</div>
+											</div>
+											<div class="form-group row">
+												<label class="col-sm-2 col-form-label">Varsa Eklemek İstedikleriniz</label>
+												<div class="col-sm-10">
+													<textarea class="form-control" rows="4" asp-for="Description"></textarea>
+													<span class="text-danger" asp-validation-for="Description"></span>
+												</div>
+											</div>
+										</div>
+										<div class="form-actions center">
+											<button type="submit" class="btn btn-primary">Ekle</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
 </div>
 
 @*<script>

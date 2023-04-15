@@ -8,7 +8,7 @@ namespace BusinessLayer.Concrete
 {
 	public class FileManager : IFileService
 	{
-		public void FileDelete(string name)
+		public void DeleteUserPicture(string name)
 		{
 			var resource = Directory.GetCurrentDirectory();
 			var path = resource + "/wwwroot/images/user/" + name;
@@ -18,7 +18,7 @@ namespace BusinessLayer.Concrete
 			}
 		}
 
-		public async Task<string> FileSave(IFormFile file)
+		public async Task<string> AddUserPicture(IFormFile file)
 		{
 			var resource = Directory.GetCurrentDirectory();
 			var extension = Path.GetExtension(file.FileName);

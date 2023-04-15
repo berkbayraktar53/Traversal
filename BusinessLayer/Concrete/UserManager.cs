@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System.Security;
 
 namespace BusinessLayer.Concrete
 {
@@ -112,8 +111,7 @@ namespace BusinessLayer.Concrete
 
 		public async Task Update(UserListDto userListDto)
 		{
-			var newImageName = await _fileService.FileSave(userListDto.UserImage);
-			_fileService.FileDelete(GetByUser().UserImage);
+			var newImageName = await _fileService.AddUserPicture(userListDto.UserImage);
 			var user = GetByUser();
 			user.Id = userListDto.Id;
 			user.UserImage = newImageName;
