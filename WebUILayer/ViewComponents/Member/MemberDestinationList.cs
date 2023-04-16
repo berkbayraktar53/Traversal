@@ -14,7 +14,7 @@ namespace WebUILayer.ViewComponents.Member
 
 		public IViewComponentResult Invoke()
 		{
-			var values = _destinationService.GetListByActiveStatus();
+			var values = _destinationService.GetFourDestinationByActiveStatus();
 			return View(values);
 		}
 	}

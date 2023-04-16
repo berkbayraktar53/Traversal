@@ -1,0 +1,55 @@
+﻿@model List<Guide>
+<div class="col-xl-4 col-lg-12">
+	<div class="card">
+		<div class="card-header">
+			<h4 class="card-title text-center">Tur Rehberleri</h4>
+			<a class="heading-elements-toggle">
+				<i class="fa fa-ellipsis-v font-medium-3"></i>
+			</a>
+			<div class="heading-elements">
+				<ul class="list-inline mb-0">
+					<li>
+						<a data-action="reload">
+							<i class="ft-rotate-cw"></i>
+						</a>
+					</li>
+					<li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="card-content">
+			<div id="recent-buyers" class="media-list">
+				@foreach (var guide in Model)
+				{
+					<a href="/Guide/Index" target="_blank" class="media border-0">
+						<div class="media-left pr-1">
+							<span class="avatar avatar-md">
+								<img class="media-object rounded-circle" style="height:45px;width:40px;" src="~/images/guide/@guide.GuideImage" />
+								<i></i>
+							</span>
+						</div>
+						<div class="media-body w-100">
+							<span class="list-group-item-heading">
+								@guide.NameSurname
+							</span>
+							<ul class="list-unstyled users-list m-0 float-right">
+								<li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Twitter" class="avatar avatar-sm pull-up">
+									<img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius" src="~/templates/member/theme-assets/images/portfolio/twitter.png" height="45" width="40" alt="Avatar">
+								</li>
+								<li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Instagram" class="avatar avatar-sm pull-up">
+									<img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius" src="~/templates/member/theme-assets/images/portfolio/instagram.jpg" height="45" width="40" alt="Avatar">
+								</li>
+							</ul>
+							<p class="list-group-item-text mb-0">
+								<span class="blue-grey lighten-2 font-small-3">@guide.Description</span>
+							</p>
+						</div>
+					</a>
+				}
+			</div>
+		</div>
+		<div class="card-body text-center">
+			<a href="/Guide/Index" target="_blank" class="card-link">Tümünü Gör</a>
+		</div>
+	</div>
+</div>

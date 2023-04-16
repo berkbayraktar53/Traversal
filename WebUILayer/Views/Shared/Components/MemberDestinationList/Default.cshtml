@@ -1,7 +1,8 @@
-﻿<div class="col-xl-4 col-lg-12">
+﻿@model List<Destination>
+<div class="col-xl-4 col-lg-12">
 	<div class="card">
 		<div class="card-header">
-			<h4 class="card-title text-center">Aktif Tur Rotaları</h4>
+			<h4 class="card-title text-center">Tur Rotaları</h4>
 			<a class="heading-elements-toggle">
 				<i class="fa fa-ellipsis-v font-medium-3"></i>
 			</a>
@@ -12,132 +13,38 @@
 							<i class="ft-rotate-cw"></i>
 						</a>
 					</li>
+					<li><a data-action="expand"><i class="ft-maximize"></i></a></li>
 				</ul>
 			</div>
 		</div>
 		<div class="card-content">
 			<div id="recent-buyers" class="media-list">
-				<a href="#" class="media border-0">
-					<div class="media-left pr-1">
-						<span class="avatar avatar-md avatar-online">
-							<img class="media-object rounded-circle" src="~/templates/member/theme-assets/images/portrait/small/avatar-s-7.png" alt="Generic placeholder image">
-							<i></i>
-						</span>
-					</div>
-					<div class="media-body w-100">
-						<span class="list-group-item-heading">
-							Kristopher Candy
-						</span>
-						<ul class="list-unstyled users-list m-0 float-right">
-							<li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Product 1" class="avatar avatar-sm pull-up">
-								<img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius" src="~/templates/member/theme-assets/images/portfolio/portfolio-1.jpg" alt="Avatar">
-							</li>
-							<li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Product 2" class="avatar avatar-sm pull-up">
-								<img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius" src="~/templates/member/theme-assets/images/portfolio/portfolio-2.jpg" alt="Avatar">
-							</li>
-							<li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Product 3" class="avatar avatar-sm pull-up">
-								<img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius" src="~/templates/member/theme-assets/images/portfolio/portfolio-4.jpg" alt="Avatar">
-							</li>
-						</ul>
-						<p class="list-group-item-text mb-0">
-							<span class="blue-grey lighten-2 font-small-3"> #INV-12332 </span>
-						</p>
-					</div>
-				</a>
-				<a href="#" class="media border-0">
-					<div class="media-left pr-1">
-						<span class="avatar avatar-md avatar-away">
-							<img class="media-object rounded-circle" src="~/templates/member/theme-assets/images/portrait/small/avatar-s-8.png" alt="Generic placeholder image">
-							<i></i>
-						</span>
-					</div>
-					<div class="media-body w-100">
-						<span class="list-group-item-heading">
-							Lawrence Fowler
-						</span>
-						<ul class="list-unstyled users-list m-0 float-right">
-							<li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Product 1" class="avatar avatar-sm pull-up">
-								<img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius" src="~/templates/member/theme-assets/images/portfolio/portfolio-5.jpg" alt="Avatar">
-							</li>
-							<li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Product 2" class="avatar avatar-sm pull-up">
-								<img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius" src="~/templates/member/theme-assets/images/portfolio/portfolio-6.jpg" alt="Avatar">
-							</li>
-						</ul>
-						<p class="list-group-item-text mb-0">
-							<span class="blue-grey lighten-2 font-small-3"> #INV-12333 </span>
-						</p>
-					</div>
-				</a>
-				<a href="#" class="media border-0">
-					<div class="media-left pr-1">
-						<span class="avatar avatar-md avatar-busy">
-							<img class="media-object rounded-circle" src="~/templates/member/theme-assets/images/portrait/small/avatar-s-9.png" alt="Generic placeholder image">
-							<i></i>
-						</span>
-					</div>
-					<div class="media-body w-100">
-						<span class="list-group-item-heading">
-							Linda Olson
-						</span>
-						<ul class="list-unstyled users-list m-0 float-right">
-							<li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Product 1" class="avatar avatar-sm pull-up">
-								<img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius" src="~/templates/member/theme-assets/images/portfolio/portfolio-2.jpg" alt="Avatar">
-							</li>
-							<li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Product 2" class="avatar avatar-sm pull-up">
-								<img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius" src="~/templates/member/theme-assets/images/portfolio/portfolio-5.jpg" alt="Avatar">
-							</li>
-						</ul>
-						<p class="list-group-item-text mb-0">
-							<span class="blue-grey lighten-2 font-small-3"> #INV-12334 </span>
-						</p>
-					</div>
-				</a>
-				<a href="#" class="media border-0">
-					<div class="media-left pr-1">
-						<span class="avatar avatar-md avatar-online">
-							<img class="media-object rounded-circle" src="~/templates/member/theme-assets/images/portrait/small/avatar-s-10.png" alt="Generic placeholder image">
-							<i></i>
-						</span>
-					</div>
-					<div class="media-body w-100">
-						<span class="list-group-item-heading">
-							Roy Clark
-						</span>
-						<ul class="list-unstyled users-list m-0 float-right">
-							<li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Product 1" class="avatar avatar-sm pull-up">
-								<img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius" src="~/templates/member/theme-assets/images/portfolio/portfolio-6.jpg" alt="Avatar">
-							</li>
-							<li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Product 2" class="avatar avatar-sm pull-up">
-								<img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius" src="~/templates/member/theme-assets/images/portfolio/portfolio-1.jpg" alt="Avatar">
-							</li>
-						</ul>
-						<p class="list-group-item-text mb-0">
-							<span class="blue-grey lighten-2 font-small-3"> #INV-12335 </span>
-						</p>
-					</div>
-				</a>
-				<a href="#" class="media border-0">
-					<div class="media-left pr-1">
-						<span class="avatar avatar-md avatar-online">
-							<img class="media-object rounded-circle" src="~/templates/member/theme-assets/images/portrait/small/avatar-s-11.png" alt="Generic placeholder image" />
-							<i></i>
-						</span>
-					</div>
-					<div class="media-body w-100">
-						<span class="list-group-item-heading">
-							Kristopher Candy
-						</span>
-						<ul class="list-unstyled users-list m-0 float-right">
-							<li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Product 1" class="avatar avatar-sm pull-up">
-								<img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius" src="~/templates/member/theme-assets/images/portfolio/portfolio-5.jpg" alt="Avatar" />
-							</li>
-						</ul>
-						<p class="list-group-item-text mb-0">
-							<span class="blue-grey lighten-2 font-small-3"> #INV-12336 </span>
-						</p>
-					</div>
-				</a>
+				@foreach (var destination in Model)
+				{
+					<a href="/Destination/Detail/@destination.Id" target="_blank" class="media border-0">
+						<div class="media-left pr-1">
+							<span class="avatar avatar-md">
+								<img class="media-object rounded-circle" style="height:45px;width:40px;" src="~/images/destination/@destination.Image" />
+								<i></i>
+							</span>
+						</div>
+						<div class="media-body w-100">
+							<span class="list-group-item-heading">
+								@destination.City Turu
+							</span>
+							<ul class="list-unstyled users-list m-0 float-right">
+								@String.Format("{0:n}", @destination.Price) ₺
+							</ul>
+							<p class="list-group-item-text mb-0">
+								<span class="blue-grey lighten-2 font-small-3"> @destination.Date.ToString("dd MMMM yyyy") <span style="float:right">@destination.DayNight</span> </span>
+							</p>
+						</div>
+					</a>
+				}
 			</div>
+		</div>
+		<div class="card-body text-center">
+			<a href="/Member/Destination/Index" class="card-link">Tümünü Gör</a>
 		</div>
 	</div>
 </div>

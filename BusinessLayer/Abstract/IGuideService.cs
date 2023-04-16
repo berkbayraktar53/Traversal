@@ -12,5 +12,6 @@ namespace BusinessLayer.Abstract
         Guide GetById(int id);
         List<Guide> GetList();
         List<Guide> GetListByActiveStatus();
-    }
+		List<Guide> GetFourGuideByActiveStatus();
+	}
 }

@@ -52,6 +52,11 @@ namespace BusinessLayer.Concrete
 			return _destinationDal.GetList(p => p.Status == true).TakeLast(8).OrderByDescending(p => p.Date).ToList();
 		}
 
+		public List<Destination> GetFourDestinationByActiveStatus()
+		{
+			return _destinationDal.GetList(p => p.Status == true).TakeLast(4).OrderByDescending(p => p.Date).ToList();
+		}
+
 		public List<Destination> GetList()
 		{
 			return _destinationDal.GetList().OrderByDescending(p => p.Id).ToList();
