@@ -4,35 +4,20 @@
 			<div class="collapse navbar-collapse show" id="navbar-mobile">
 				<ul class="nav navbar-nav mr-auto float-left">
 					<li class="nav-item d-block d-md-none"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu"></i></a></li>
-					<li class="nav-item d-none d-md-block"><a class="nav-link nav-link-expand" href="#"><i class="ficon ft-maximize"></i></a></li>
 					<li class="nav-item dropdown navbar-search">
 						<a class="nav-link dropdown-toggle hide" data-toggle="dropdown" href="#"><i class="ficon ft-search"></i></a>
 						<ul class="dropdown-menu">
 							<li class="arrow_box">
-								<form>
+								<form asp-action="GetCitiesSearchByName" asp-controller="Destination" method="post">
 									<div class="input-group search-box">
 										<div class="position-relative has-icon-right full-width">
-											<input class="form-control" id="search" type="text" placeholder="Aradığınız kelime...">
+											<input class="form-control" name="searchString" type="text" placeholder="Tur Rotası Ara..." autocomplete="off" />
 											<div class="form-control-position navbar-search-close"><i class="ft-x">   </i></div>
 										</div>
 									</div>
 								</form>
 							</li>
 						</ul>
-					</li>
-				</ul>
-				<ul class="nav navbar-nav float-right">
-					<li class="dropdown dropdown-language nav-item">
-						<a class="dropdown-toggle nav-link" id="dropdown-flag" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="flag-icon flag-icon-tr"></i><span class="selected-language"></span></a>
-						<div class="dropdown-menu" aria-labelledby="dropdown-flag">
-							<div class="arrow_box">
-								<a class="dropdown-item" href="#"><i class="flag-icon flag-icon-us"></i> English</a>
-								<a class="dropdown-item" href="#"><i class="flag-icon flag-icon-de"></i> German</a>
-								<a class="dropdown-item" href="#"><i class="flag-icon flag-icon-fr"></i> French</a>
-								<a class="dropdown-item" href="#"><i class="flag-icon flag-icon-es"></i> Spanish</a>
-								<a class="dropdown-item" href="#"><i class="flag-icon flag-icon-it"></i> Italian</a>
-							</div>
-						</div>
 					</li>
 				</ul>
 				<ul class="nav navbar-nav float-right">

@@ -8,25 +8,21 @@ namespace BusinessLayer.Concrete
 {
 	public class FileManager : IFileService
 	{
-		public void DeleteUserPicture(string name)
+		public string UserFileSave(IFormFile file, string oldFileName)
 		{
 			var resource = Directory.GetCurrentDirectory();
-			var path = resource + "/wwwroot/images/user/" + name;
-			if (File.Exists(path))
+			var oldImagePath = resource + "/wwwroot/images/user/" + oldFileName;
+			if (File.Exists(oldImagePath))
 			{
-				File.Delete(path);
+				File.Delete(oldImagePath);
 			}
-		}
-
-		public async Task<string> AddUserPicture(IFormFile file)
-		{
-			var resource = Directory.GetCurrentDirectory();
 			var extension = Path.GetExtension(file.FileName);
-			var imageName = Guid.NewGuid() + extension;
-			var saveLocation = resource + "/wwwroot/images/user/" + imageName;
+			var newImageName = Guid.NewGuid() + extension;
+			var saveLocation = resource + "/wwwroot/images/user/" + newImageName;
 			var stream = new FileStream(saveLocation, FileMode.Create);
-			await file.CopyToAsync(stream);
-			return imageName;
+			file.CopyToAsync(stream);
+			stream.Close();
+			return newImageName;
 		}
 	}
 }

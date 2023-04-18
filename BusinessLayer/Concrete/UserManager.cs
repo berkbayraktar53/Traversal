@@ -111,10 +111,9 @@ namespace BusinessLayer.Concrete
 
 		public async Task Update(UserListDto userListDto)
 		{
-			var newImageName = await _fileService.AddUserPicture(userListDto.UserImage);
 			var user = GetByUser();
 			user.Id = userListDto.Id;
-			user.UserImage = newImageName;
+			user.UserImage = _fileService.UserFileSave(userListDto.UserImage, user.UserImage);
 			user.NameSurname = userListDto.NameSurname;
 			user.AboutUser = userListDto.AboutUser;
 			user.UserName = userListDto.Email;
