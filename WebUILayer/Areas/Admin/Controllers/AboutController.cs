@@ -28,9 +28,9 @@ namespace WebUILayer.Areas.Admin.Controllers
 			_notyfService = notyfService;
 		}
 
-		public IActionResult Index()
+		public IActionResult Index(int page = 1)
 		{
-			var values = _aboutService.GetList().ToPagedList(1, 5);
+			var values = _aboutService.GetList().ToPagedList(page, 5);
 			return View(values);
 		}
 

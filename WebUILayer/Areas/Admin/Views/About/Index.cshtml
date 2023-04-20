@@ -2,7 +2,6 @@
 @{
 	ViewData["Title"] = "Hakkımızda Listesi";
 	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
-	int count = 0;
 }
 
 <div class="card">
@@ -16,7 +15,6 @@
 		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th>#</th>
 					<th>Görsel</th>
 					<th>Başlık</th>
 					<th>Açıklama</th>
@@ -29,9 +27,7 @@
 			<tbody class="table-border-bottom-0">
 				@foreach (var about in Model)
 				{
-					count++;
 					<tr>
-						<td>@count</td>
 						@if (about.Image == "")
 						{
 							<td><img src="~/images/about/default.jpg" height="40" width="40" class="rounded-circle" /></td>
@@ -40,17 +36,17 @@
 						{
 							<td><img src="~/images/about/@about.Image" height="40" width="40" class="rounded-circle" /></td>
 						}
-						@if (@about.Title.Length > 20)
+						@if (@about.Title.Length > 30)
 						{
-							<td>@about.Title.Substring(0, @about.Title.Substring(0, 20).Length) ...</td>
+							<td>@about.Title.Substring(0, @about.Title.Substring(0, 30).Length) ...</td>
 						}
 						else
 						{
 							<td>@about.Title</td>
 						}
-						@if (about.Description.Length > 20)
+						@if (about.Description.Length > 30)
 						{
-							<td>@about.Description.Substring(0, about.Description.Substring(0, 20).Length) ...</td>
+							<td>@about.Description.Substring(0, about.Description.Substring(0, 30).Length) ...</td>
 						}
 						else
 						{

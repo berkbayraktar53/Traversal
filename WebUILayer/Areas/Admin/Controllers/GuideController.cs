@@ -5,29 +5,33 @@ using OfficeOpenXml;
 using EntityLayer.Dtos;
 using EntityLayer.Concrete;
 using BusinessLayer.Abstract;
+using System.Threading.Tasks;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using AspNetCoreHero.ToastNotification.Abstractions;
 using BusinessLayer.ValidationRules.FluentValidation;
 
 namespace WebUILayer.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class GuideController : Controller
     {
         private readonly IGuideService _guideService;
+        private readonly IFileService _fileService;
         private readonly INotyfService _notyfService;
 
-        public GuideController(IGuideService guideService, INotyfService notyfService)
+        public GuideController(IGuideService guideService, IFileService fileService, INotyfService notyfService)
         {
             _guideService = guideService;
+            _fileService = fileService;
             _notyfService = notyfService;
         }
 
         public IActionResult Index(int page = 1)
         {
             var result = _guideService.GetList().ToPagedList(page, 5);
-            ViewBag.totalCount = _guideService.GetList().Count;
             return View(result);
         }
 
@@ -45,23 +49,16 @@ namespace WebUILayer.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(GuideListDto guideListDto)
+        public async Task<IActionResult> Add(GuideListDto guideListDto)
         {
             GuideValidator guideValidator = new();
             ValidationResult validationResult = guideValidator.Validate(guideListDto);
             if (validationResult.IsValid)
             {
+                string folderName = "guide";
                 Guide guide = new();
-                if (guideListDto.Image != null)
-                {
-                    var resource = Directory.GetCurrentDirectory();
-                    var extension = Path.GetExtension(guideListDto.Image.FileName);
-                    var imageName = Guid.NewGuid() + extension;
-                    var saveLocation = resource + "/wwwroot/images/guide/" + imageName;
-                    var stream = new FileStream(saveLocation, FileMode.Create);
-                    guideListDto.Image.CopyToAsync(stream);
-                    guide.GuideImage = imageName;
-                }
+                var newImageName = await _fileService.FileSave(guideListDto.Image, "", folderName);
+                guide.GuideImage = newImageName;
                 guide.NameSurname = guideListDto.NameSurname;
                 guide.Description = guideListDto.Description;
                 guide.InstagramLink = guideListDto.InstagramLink;
@@ -88,7 +85,6 @@ namespace WebUILayer.Areas.Admin.Controllers
             GuideListDto guideListDto = new()
             {
                 Id = result.Id,
-                GuideImage = result.GuideImage,
                 NameSurname = result.NameSurname,
                 Description = result.Description,
                 InstagramLink = result.InstagramLink,
@@ -99,31 +95,18 @@ namespace WebUILayer.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(GuideListDto guideListDto)
+        public async Task<IActionResult> Edit(GuideListDto guideListDto)
         {
             GuideValidator guideValidator = new();
             ValidationResult validationResult = guideValidator.Validate(guideListDto);
             if (validationResult.IsValid)
             {
+                string folderName = "guide";
                 Guide guide = new();
-                if (guideListDto.Image != null)
-                {
-                    var oldImage = _guideService.GetById(guideListDto.Id).GuideImage;
-                    var path = Directory.GetCurrentDirectory() + "/wwwroot/images/guide/" + oldImage;
-                    if (System.IO.File.Exists(path))
-                    {
-                        System.IO.File.Delete(path);
-                    }
-                    var resource = Directory.GetCurrentDirectory();
-                    var extension = Path.GetExtension(guideListDto.Image.FileName);
-                    var imageName = Guid.NewGuid() + extension;
-                    var saveLocation = resource + "/wwwroot/images/guide/" + imageName;
-                    var stream = new FileStream(saveLocation, FileMode.Create);
-                    guideListDto.Image.CopyToAsync(stream);
-                    guide.GuideImage = imageName;
-                }
+                var newImage = await _fileService.FileSave(guideListDto.Image, _guideService.GetById(guideListDto.Id).GuideImage, folderName);
                 guide.Id = guideListDto.Id;
                 guide.NameSurname = guideListDto.NameSurname;
+                guide.GuideImage = newImage;
                 guide.Description = guideListDto.Description;
                 guide.InstagramLink = guideListDto.InstagramLink;
                 guide.TwitterLink = guideListDto.TwitterLink;
@@ -144,18 +127,15 @@ namespace WebUILayer.Areas.Admin.Controllers
 
         public IActionResult Delete(int id)
         {
+            string folderName = "guide";
             var result = _guideService.GetById(id);
-            var path = Directory.GetCurrentDirectory() + "/wwwroot/images/guide/" + result.GuideImage;
-            if (System.IO.File.Exists(path))
-            {
-                System.IO.File.Delete(path);
-            }
             _guideService.Delete(result);
+            _fileService.FileDelete(result.GuideImage, folderName);
             _notyfService.Success("Rehber silindi");
             return RedirectToAction("Index", "Guide");
         }
 
-        public IActionResult GuideExcelList()
+        public IActionResult ExcelDownload()
         {
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             ExcelPackage excelPackage = new();
@@ -177,13 +157,13 @@ namespace WebUILayer.Areas.Admin.Controllers
                 workSheet.Cells[rowCount, 4].Value = item.Description;
                 workSheet.Cells[rowCount, 5].Value = item.InstagramLink;
                 workSheet.Cells[rowCount, 6].Value = item.TwitterLink;
-                workSheet.Cells[rowCount, 7].Value = (item.Status == true ? "AKTİF" : "PASİF");
+                workSheet.Cells[rowCount, 7].Value = (item.Status == true ? "Aktif" : "Pasif");
                 rowCount++;
             }
             var stream = new MemoryStream();
             excelPackage.SaveAs(stream);
             var content = stream.ToArray();
-            return File(content, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheets", "RehberListesi.xlsx");
+            return File(content, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheets", "Traversal | Rehber Listesi.xlsx");
         }
     }
 }
