@@ -1,0 +1,51 @@
+﻿@model About
+@{
+	ViewData["Title"] = "Hakkımızda Detayı";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-xxl">
+    <div class="card mb-4">
+        <div class="card-header text-center">
+            <h4 class="mb-0">Hakkımızda Detayı</h4>
+        </div>
+        <div class="card-body">
+            <form>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Görsel</label>
+                    <div class="col-sm-4">
+                        <img src="~/images/about/@Model.Image" class="img-center" />
+                    </div>
+                    <label class="col-sm-2 col-form-label">Durum</label>
+                    <div class="col-sm-4">
+                        @if (Model.Status == true)
+                        {
+                            <input class="form-control" disabled value="Aktif" />
+                        }
+                        else
+                        {
+                            <input class="form-control" disabled value="Pasif" />
+                        }
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Başlık</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" disabled asp-for="Title" />
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Açıklama</label>
+                    <div class="col-sm-10">
+                        <textarea class="form-control" rows="5" disabled asp-for="Description"></textarea>
+                    </div>
+                </div>
+                <div class="row justify-content-end text-center">
+                    <div class="col-sm-12">
+                        <a href="/Admin/About/Index" class="btn btn-primary" style="color:white">Geri Dön</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

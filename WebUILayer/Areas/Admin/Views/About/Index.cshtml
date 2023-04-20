@@ -1,0 +1,82 @@
+﻿@model IPagedList<About>
+@{
+	ViewData["Title"] = "Hakkımızda Listesi";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+	int count = 0;
+}
+
+<div class="card">
+	<h4 class="card-header text-center">
+		<label class="labelClass">Toplam Hakkımızda Sayısı: @Model.TotalItemCount</label>
+		Hakkımızda Listesi
+		<a href="/Admin/About/Add" class="tableButton btn btn-success"><i class="tf-icons mb-1 bx bx-plus-circle"></i> Ekle</a>
+		<a href="/Admin/About/ExcelDownload" class="tableButton btn btn-info"><i class="tf-icons mb-1 bx bxs-download"></i> Excel</a>
+	</h4>
+	<div class="table-responsive text-nowrap">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Görsel</th>
+					<th>Başlık</th>
+					<th>Açıklama</th>
+					<th>Detay</th>
+					<th>Durum</th>
+					<th>Düzenle</th>
+					<th>Sil</th>
+				</tr>
+			</thead>
+			<tbody class="table-border-bottom-0">
+				@foreach (var about in Model)
+				{
+					count++;
+					<tr>
+						<td>@count</td>
+						@if (about.Image == "")
+						{
+							<td><img src="~/images/about/default.jpg" height="40" width="40" class="rounded-circle" /></td>
+						}
+						else
+						{
+							<td><img src="~/images/about/@about.Image" height="40" width="40" class="rounded-circle" /></td>
+						}
+						@if (@about.Title.Length > 20)
+						{
+							<td>@about.Title.Substring(0, @about.Title.Substring(0, 20).Length) ...</td>
+						}
+						else
+						{
+							<td>@about.Title</td>
+						}
+						@if (about.Description.Length > 20)
+						{
+							<td>@about.Description.Substring(0, about.Description.Substring(0, 20).Length) ...</td>
+						}
+						else
+						{
+							<td>@about.Description</td>
+						}
+						<td><a class="badge bg-label-info me-1" href="/Admin/About/Detail/@about.Id">Detay</a></td>
+						@if (about.Status == true)
+						{
+							<td><a class="badge bg-label-success me-1" href="/Admin/About/ChangeStatus/@about.Id">Aktif</a></td>
+						}
+						else
+						{
+							<td><a class="badge bg-label-danger me-1" href="/Admin/About/ChangeStatus/@about.Id">Pasif</a></td>
+						}
+						<td><a class="badge bg-label-warning me-1" href="/Admin/About/Edit/@about.Id">Düzenle</a></td>
+						<td><a class="badge bg-label-danger me-1" href="/Admin/About/Delete/@about.Id" onclick="return confirm('Hakkımızda silinecek. Onaylıyor musun?')">Sil</a></td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+	<div style="display:flex;justify-content:center;">
+		@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }),
+		new PagedListRenderOptions {
+		LiElementClasses = new string[] { "page-item" },
+		PageClasses = new string[] { "page-link" }
+		})
+	</div>
+</div>

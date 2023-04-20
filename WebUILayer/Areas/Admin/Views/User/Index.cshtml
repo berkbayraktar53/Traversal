@@ -1,90 +1,90 @@
 ﻿@model IPagedList<User>
 @{
-    ViewData["Title"] = "Kullanıcı Listesi";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "Kullanıcı Listesi";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
 <div class="card">
-    <h4 class="card-header text-center">
-        <label class="labelClass">Toplam Kullanıcı Sayısı: @ViewBag.totalUserCount</label>
-        Kullanıcı Listesi
-        <a href="/Admin/User/Add" class="tableButton btn btn-success"><i class="tf-icons mb-1 bx bx-plus-circle"></i> Ekle</a>
-        <a href="/Admin/User/UserExcelList" class="tableButton btn btn-info"><i class="tf-icons mb-1 bx bxs-download"></i> Excel</a>
-    </h4>
-    <div class="table-responsive text-nowrap">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Görsel</th>
-                    <th>Adı Soyadı</th>
-                    <th>Hakkında</th>
-                    <th>Email</th>
-                    <th>Detay</th>
-                    <th>Rol Ata</th>
-                    <th>Durum</th>
-                    <th>Düzenle</th>
-                    <th>Sil</th>
-                </tr>
-            </thead>
-            <tbody class="table-border-bottom-0">
-                @foreach (var user in Model)
-                {
-                    <tr>
-                        @if (user.UserImage == null)
-                        {
-                            <td><img src="~/images/user/user.png" height="40" width="40" class="rounded-circle" /></td>
-                        }
-                        else
-                        {
-                            <td><img src="~/images/user/@user.UserImage" height="40" width="40" class="rounded-circle" /></td>
-                        }
-                        @if (@user.NameSurname.Length > 10)
-                        {
-                            <td>@user.NameSurname.Substring(0, @user.NameSurname.Substring(0, 10).Length) ...</td>
-                        }
-                        else
-                        {
-                            <td>@user.NameSurname</td>
-                        }
-                        @if (@user.AboutUser.Length > 10)
-                        {
-                            <td>@user.AboutUser.Substring(0, @user.AboutUser.Substring(0, 10).Length) ...</td>
-                        }
-                        else
-                        {
-                            <td>@user.AboutUser</td>
-                        }
-                        @if (@user.Email.Length > 10)
-                        {
-                            <td>@user.Email.Substring(0, @user.Email.Substring(0, 10).Length) ...</td>
-                        }
-                        else
-                        {
-                            <td>@user.Email</td>
-                        }
-                        <td><a class="badge bg-label-info me-1" href="/Admin/User/Detail/@user.Id">Detay</a></td>
-                        <td><a class="badge bg-label-secondary me-1" href="/Admin/User/Detail/@user.Id">Rol Ata</a></td>
-                        @if (user.Status == true)
-                        {
-                            <td><a class="badge bg-label-success me-1" href="/Admin/User/ChangeStatus/@user.Id">Aktif</a></td>
-                        }
-                        else
-                        {
-                            <td><a class="badge bg-label-danger me-1" href="/Admin/User/ChangeStatus/@user.Id">Pasif</a></td>
-                        }
-                        <td><a class="badge bg-label-warning me-1" href="/Admin/User/Edit/@user.Id">Düzenle</a></td>
-                        <td><a class="badge bg-label-danger me-1" href="/Admin/User/Delete/@user.Id" onclick="return confirm('Kullanıcı silinecek. Onaylıyor musun?')">Sil</a></td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+	<h4 class="card-header text-center">
+		<label class="labelClass">Toplam Kullanıcı Sayısı: @Model.TotalItemCount</label>
+		Kullanıcı Listesi
+		<a href="/Admin/User/Add" class="tableButton btn btn-success"><i class="tf-icons mb-1 bx bx-plus-circle"></i> Ekle</a>
+		<a href="/Admin/User/UserExcelList" class="tableButton btn btn-info"><i class="tf-icons mb-1 bx bxs-download"></i> Excel</a>
+	</h4>
+	<div class="table-responsive text-nowrap">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Görsel</th>
+					<th>Adı Soyadı</th>
+					<th>Hakkında</th>
+					<th>Email</th>
+					<th>Detay</th>
+					<th>Rol Ata</th>
+					<th>Durum</th>
+					<th>Düzenle</th>
+					<th>Sil</th>
+				</tr>
+			</thead>
+			<tbody class="table-border-bottom-0">
+				@foreach (var user in Model)
+				{
+					<tr>
+						@if (user.UserImage == null)
+						{
+							<td><img src="~/images/user/user.png" height="40" width="40" class="rounded-circle" /></td>
+						}
+						else
+						{
+							<td><img src="~/images/user/@user.UserImage" height="40" width="40" class="rounded-circle" /></td>
+						}
+						@if (@user.NameSurname.Length > 10)
+						{
+							<td>@user.NameSurname.Substring(0, @user.NameSurname.Substring(0, 10).Length) ...</td>
+						}
+						else
+						{
+							<td>@user.NameSurname</td>
+						}
+						@if (@user.AboutUser.Length > 10)
+						{
+							<td>@user.AboutUser.Substring(0, @user.AboutUser.Substring(0, 10).Length) ...</td>
+						}
+						else
+						{
+							<td>@user.AboutUser</td>
+						}
+						@if (@user.Email.Length > 10)
+						{
+							<td>@user.Email.Substring(0, @user.Email.Substring(0, 10).Length) ...</td>
+						}
+						else
+						{
+							<td>@user.Email</td>
+						}
+						<td><a class="badge bg-label-info me-1" href="/Admin/User/Detail/@user.Id">Detay</a></td>
+						<td><a class="badge bg-label-secondary me-1" href="/Admin/User/Detail/@user.Id">Rol Ata</a></td>
+						@if (user.Status == true)
+						{
+							<td><a class="badge bg-label-success me-1" href="/Admin/User/ChangeStatus/@user.Id">Aktif</a></td>
+						}
+						else
+						{
+							<td><a class="badge bg-label-danger me-1" href="/Admin/User/ChangeStatus/@user.Id">Pasif</a></td>
+						}
+						<td><a class="badge bg-label-warning me-1" href="/Admin/User/Edit/@user.Id">Düzenle</a></td>
+						<td><a class="badge bg-label-danger me-1" href="/Admin/User/Delete/@user.Id" onclick="return confirm('Kullanıcı silinecek. Onaylıyor musun?')">Sil</a></td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
 </div>
 <br />
 <div style="display:flex;justify-content:center;margin-right:60px;">
-    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }),
-    new PagedListRenderOptions {
-    LiElementClasses = new string[] { "page-item" },
-    PageClasses = new string[] { "page-link" }
-    })
+	@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }),
+	new PagedListRenderOptions {
+	LiElementClasses = new string[] { "page-item" },
+	PageClasses = new string[] { "page-link" }
+	})
 </div>

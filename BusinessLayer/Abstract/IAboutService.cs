@@ -3,8 +3,14 @@ using System.Collections.Generic;
 
 namespace BusinessLayer.Abstract
 {
-    public interface IAboutService
-    {
-        List<About> GetListByActiveStatus();
-    }
+	public interface IAboutService
+	{
+		void Add(About about);
+		void Delete(About about);
+		void Update(About about);
+		About GetById(int id);
+		About ChangeStatus(int id);
+		List<About> GetList();
+		List<About> GetListByActiveStatus();
+	}
 }
