@@ -1,51 +1,58 @@
-﻿@model Client 
+﻿@model ClientListDto
 @{
-    ViewData["Title"] = "Müşteri Ekle";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "Müşteri Ekle";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
 <div class="col-xxl">
-    <div class="card mb-4">
-        <div class="card-header text-center">
-            <h4 class="mb-0">Müşteri Ekle</h4>
-        </div>
-        <div class="card-body">
-            <form asp-action="Add" method="post" enctype="multipart/form-data">
-                <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label">Resim</label>
-                    <div class="col-sm-4">
-                        <img src="~/templates/traversal/assets/images/c1.jpg" class="rounded-circle img-center" height="40" width="40" id="pictureShown" />
-                    </div>
-                    <label class="col-sm-2 col-form-label">Resim Seç</label>
-                    <div class="col-sm-4">
-                        <input type="file" asp-for="ClientImage" class="form-control" id="guideImage" />
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label">Ad Soyad</label>
-                    <div class="col-sm-4">
-                        <input type="text" asp-for="NameSurname" class="form-control" autocomplete="off" />
-                    </div>
-                    <label class="col-sm-2 col-form-label">Açıklama</label>
-                    <div class="col-sm-4">
-                        <input type="text" asp-for="ClientComment" class="form-control" autocomplete="off" />
-                    </div>
-                </div>
-                <div class="row justify-content-end text-center">
-                    <div class="col-sm-12">
-                        <button type="submit" class="btn btn-success">Ekle</button>
-                        <a class="btn btn-primary" style="color:white" href="/Admin/Client/Index">Geri Dön</a>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
+	<div class="card mb-4">
+		<div class="card-header text-center">
+			<h4 class="mb-0">Müşteri Ekle</h4>
+		</div>
+		<div class="card-body">
+			<form asp-action="Add" method="post" enctype="multipart/form-data">
+				<div class="row mb-3">
+					<label class="col-sm-2 col-form-label">Resim</label>
+					<div class="col-sm-4">
+						<img src="~/images/user/user.png" class="rounded-circle img-center" height="40" width="40" id="pictureShown" />
+					</div>
+					<label class="col-sm-2 col-form-label">Resim Seç</label>
+					<div class="col-sm-4">
+						<input type="file" asp-for="ClientImage" class="form-control" id="clientImage" />
+						<span asp-validation-for="ClientImage" class="spanClass"></span>
+
+					</div>
+				</div>
+				<div class="row mb-3">
+					<label class="col-sm-2 col-form-label">Adı Soyadı</label>
+					<div class="col-sm-10">
+						<input type="text" asp-for="NameSurname" class="form-control" autocomplete="off" />
+						<span asp-validation-for="NameSurname" class="spanClass"></span>
+					</div>
+				</div>
+				<div class="row mb-3">
+					<label class="col-sm-2 col-form-label">Yorumu</label>
+					<div class="col-sm-10">
+						<textarea rows="5" class="form-control" asp-for="ClientComment" autocomplete="off"></textarea>
+						<span asp-validation-for="ClientComment" class="spanClass"></span>
+
+					</div>
+				</div>
+				<div class="row justify-content-end text-center">
+					<div class="col-sm-12">
+						<button type="submit" class="btn btn-success">Ekle</button>
+						<a class="btn btn-primary" style="color:white" href="/Admin/Client/Index">Geri Dön</a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>
 <script src="~/templates/admin/assets/vendor/libs/jquery/jquery.js"></script>
 <script type="text/javascript">
-    $(document).ready(function () {
-        $("#guideImage").change(function (e) {
-            $("#pictureShown").attr('src', URL.createObjectURL(e.target.files[0]));
-        });
-    });
+	$(document).ready(function () {
+		$("#clientImage").change(function (e) {
+			$("#pictureShown").attr('src', URL.createObjectURL(e.target.files[0]));
+		});
+	});
 </script>

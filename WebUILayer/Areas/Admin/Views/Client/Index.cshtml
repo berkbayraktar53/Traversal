@@ -1,67 +1,69 @@
-﻿@model List<Client>
+﻿@model IPagedList<Client>
 @{
-    ViewData["Title"] = "Müşteriler";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "Müşteri Listesi";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
 <div class="card">
-    <h4 class="card-header text-center">
-        <label class="labelClass">Toplam @ViewBag.totalCount 1 Rehber</label>
-        Müşteriler
-        <a href="/Admin/Client/Add" class="tableButton btn btn-success"><i class="tf-icons mb-1 bx bx-plus-circle"></i> Ekle</a>
-        @*<a href="/Admin/Client/GuideExcelList" class="tableButton btn btn-info"><i class="tf-icons mb-1 bx bxs-download"></i> Excel</a>*@
-    </h4>
-    <div class="table-responsive text-nowrap">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Resim</th>
-                    <th>Ad Soyad</th>
-                    <th>Yorum</th>
-                    <th>Durum</th>
-                </tr>
-            </thead>
-            <tbody class="table-border-bottom-0">
-                @foreach (var client in Model)
-                {
-                    <tr>
-                        <td>
-                            <img src="~/templates/traversal/assets/images/c1.jpg" height="40" width="40" class="rounded-circle" />
-                        </td>
-                        <td>@client.NameSurname</td>
-                        <td>@client.ClientComment</td>
-                        <td>
-                            @if (client.Status == true)
-                            {
-                                <span class="badge bg-label-success me-1">Aktif</span>
-                            }
-                            else
-                            {
-                                <span class="badge bg-label-danger me-1">Pasif</span>
-                            }
-                        </td>
-                        <td>
-                            <div class="dropdown">
-                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="/Admin/Client/ChangeStatus/@client.Id"><i class="bx bx-recycle me-1"></i>Durum Değiştir</a>
-                                    <a class="dropdown-item" href="/Admin/Client/Edit/@client.Id"><i class="bx bx-edit me-1"></i>Düzenle</a>
-                                    <a class="dropdown-item" href="/Admin/Client/Delete/@client.Id" onclick="return confirm('Rehber silinecek. Onaylıyor musun?')"><i class="bx bx-trash me-1"></i>Sil</a>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-    @*<div style="display:flex;justify-content:center;">
-        @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }),
-        new PagedListRenderOptions {
-        LiElementClasses = new string[] { "page-item" },
-        PageClasses = new string[] { "page-link" }
-        })
-    </div>*@
+	<h4 class="card-header text-center">
+		<label class="labelClass">Toplam Müşteri Sayısı: @Model.TotalItemCount</label>
+		Müşteri Listesi
+		<a href="/Admin/Client/Add" class="tableButton btn btn-success"><i class="tf-icons mb-1 bx bx-plus-circle"></i> Ekle</a>
+		<a href="/Admin/Client/ExcelDownload" class="tableButton btn btn-info"><i class="tf-icons mb-1 bx bxs-download"></i> Excel</a>
+	</h4>
+	<div class="table-responsive text-nowrap">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Görsel</th>
+					<th>Müşteri Adı Soyadı</th>
+					<th>Müşteri Yorumu</th>
+					<th>Durum</th>
+					<th>Düzenle</th>
+					<th>Sil</th>
+				</tr>
+			</thead>
+			<tbody class="table-border-bottom-0">
+				@foreach (var client in Model)
+				{
+					<tr>
+						<td><img src="~/images/client/@client.ClientImage" height="40" width="40" class="rounded-circle" /></td>
+						@if (@client.NameSurname.Length > 30)
+						{
+							<td>@client.NameSurname.Substring(0, @client.NameSurname.Substring(0, 30).Length) ...</td>
+						}
+						else
+						{
+							<td>@client.NameSurname</td>
+						}
+						@if (@client.ClientComment.Length > 30)
+						{
+							<td>@client.ClientComment.Substring(0, client.ClientComment.Substring(0, 30).Length) ...</td>
+						}
+						else
+						{
+							<td>@client.ClientComment</td>
+						}
+						@if (client.Status == true)
+						{
+							<td><a class="badge bg-label-success me-1" href="/Admin/Client/ChangeStatus/@client.Id">Aktif</a></td>
+						}
+						else
+						{
+							<td><a class="badge bg-label-danger me-1" href="/Admin/Client/ChangeStatus/@client.Id">Pasif</a></td>
+						}
+						<td><a class="badge bg-label-warning me-1" href="/Admin/Client/Edit/@client.Id">Düzenle</a></td>
+						<td><a class="badge bg-label-danger me-1" href="/Admin/Client/Delete/@client.Id" onclick="return confirm('Müşteri silinecek. Onaylıyor musun?')">Sil</a></td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+	<div style="display:flex;justify-content:center;">
+		@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }),
+		new PagedListRenderOptions {
+		LiElementClasses = new string[] { "page-item" },
+		PageClasses = new string[] { "page-link" }
+		})
+	</div>
 </div>
