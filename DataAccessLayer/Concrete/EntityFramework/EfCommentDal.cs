@@ -8,18 +8,24 @@ using CoreLayer.DataAccessLayer.Concrete.EntityFramework;
 
 namespace DataAccessLayer.Concrete.EntityFramework
 {
-    public class EfCommentDal : EfEntityRepositoryBase<Comment, DatabaseContext>, ICommentDal
-    {
-        public List<Comment> GetCommentListWithDestination()
-        {
-            var context = new DatabaseContext();
-            return context.Comments.Include(p => p.Destination).ToList();
-        }
+	public class EfCommentDal : EfEntityRepositoryBase<Comment, DatabaseContext>, ICommentDal
+	{
+		public List<Comment> GetCommentListWithDestination()
+		{
+			var context = new DatabaseContext();
+			return context.Comments.Include(p => p.Destination).ToList();
+		}
 
-        public List<Comment> GetCommentListWithDestinationAndUser(int id)
-        {
-            var context = new DatabaseContext();
-            return context.Comments.Where(p => p.UserId == id).Include(p => p.Destination).Include(p => p.User).ToList();
-        }
-    }
+		public List<Comment> GetCommentListWithDestinationAndUser(int id)
+		{
+			var context = new DatabaseContext();
+			return context.Comments.Where(p => p.UserId == id).Include(p => p.Destination).Include(p => p.User).ToList();
+		}
+
+		public List<Comment> GetCommentListWithDestinationAndUser()
+		{
+			var context = new DatabaseContext();
+			return context.Comments.Include(p => p.Destination).Include(p => p.User).ToList();
+		}
+	}
 }

@@ -1,0 +1,84 @@
+﻿@model IPagedList<Comment>
+@{
+	ViewData["Title"] = "Yorum Listesi";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+	<h4 class="card-header text-center">
+		<label class="labelClass">Toplam Yorum Sayısı: @Model.TotalItemCount</label>
+		Yorum Listesi
+		<a href="/Admin/Comment/Add" class="tableButton btn btn-success"><i class="tf-icons mb-1 bx bx-plus-circle"></i> Ekle</a>
+		<a href="/Admin/Comment/ExcelDownload" class="tableButton btn btn-info"><i class="tf-icons mb-1 bx bxs-download"></i> Excel</a>
+	</h4>
+	<div class="table-responsive text-nowrap">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Görsel</th>
+					<th>Adı Soyadı</th>
+					<th>Rota</th>
+					<th>Yorum İçeriği</th>
+					<th>Yorum Tarihi</th>
+					<th>Detay</th>
+					<th>Durum</th>
+					<th>Düzenle</th>
+					<th>Sil</th>
+				</tr>
+			</thead>
+			<tbody class="table-border-bottom-0">
+				@foreach (var comment in Model)
+				{
+					<tr>
+						<td>
+							<img src="~/images/user/@comment.User.UserImage" height="40" width="40" class="rounded-circle" />
+						</td>
+						@if (comment.NameSurname.Length > 20)
+						{
+							<td>@comment.NameSurname.Substring(0, comment.NameSurname.Substring(0, 20).Length) ...</td>
+						}
+						else
+						{
+							<td>@comment.NameSurname</td>
+						}
+						@if (comment.Destination.City.Length > 20)
+						{
+							<td>@comment.Destination.City.Substring(0, comment.Destination.City.Substring(0, 20).Length) ...</td>
+						}
+						else
+						{
+							<td>@comment.Destination.City</td>
+						}
+						@if (comment.CommentContent.Length > 20)
+						{
+							<td>@comment.CommentContent.Substring(0, comment.CommentContent.Substring(0, 20).Length) ...</td>
+						}
+						else
+						{
+							<td>@comment.CommentContent</td>
+						}
+						<td>@comment.CommentDate.ToString("dd/MM/yyyy")</td>
+						<td><a class="badge bg-label-info me-1" href="/Destination/Detail/@comment.Destination.Id" target="_blank">Detay</a></td>
+						@if (comment.Status == true)
+						{
+							<td><a class="badge bg-label-success me-1" href="/Admin/Comment/ChangeStatus/@comment.Id">Aktif</a></td>
+						}
+						else
+						{
+							<td><a class="badge bg-label-danger me-1" href="/Admin/Comment/ChangeStatus/@comment.Id">Pasif</a></td>
+						}
+						<td><a class="badge bg-label-warning me-1" href="/Admin/Comment/Edit/@comment.Id">Düzenle</a></td>
+						<td><a class="badge bg-label-danger me-1" href="/Admin/Comment/Delete/@comment.Id" onclick="return confirm('Yorum silinecek. Onaylıyor musun?')">Sil</a></td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+	<div style="display:flex;justify-content:center;">
+		@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }),
+		new PagedListRenderOptions {
+		LiElementClasses = new string[] { "page-item" },
+		PageClasses = new string[] { "page-link" }
+		})
+	</div>
+</div>
