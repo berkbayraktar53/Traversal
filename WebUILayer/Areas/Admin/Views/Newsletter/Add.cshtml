@@ -1,0 +1,30 @@
+﻿@model Newsletter
+@{
+    ViewData["Title"] = "Abonelik Ekle";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-xxl">
+	<div class="card mb-4">
+		<div class="card-header text-center">
+			<h4 class="mb-0">Abonelik Ekle</h4>
+		</div>
+		<div class="card-body">
+			<form asp-action="Add" method="post">
+				<div class="row mb-3">
+					<label class="col-sm-2 col-form-label">Email</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" asp-for="Email" autocomplete="off" />
+						<span class="spanClass" asp-validation-for="Email"></span>
+					</div>
+				</div>
+				<div class="row justify-content-end text-center">
+					<div class="col-sm-12">
+						<button type="submit" class="btn btn-success">Ekle</button>
+						<a class="btn btn-primary" style="color:white" href="/Admin/Newsletter/Index">Geri Dön</a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,69 @@
+﻿@model IPagedList<Newsletter>
+@{
+	ViewData["Title"] = "Abonelik Listesi";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+	<h4 class="card-header text-center">
+		<label class="labelClass">Toplam Abonelik Sayısı: @Model.TotalItemCount</label>
+		Rehber Listesi
+		<a href="/Admin/Newsletter/Add" class="tableButton btn btn-success"><i class="tf-icons mb-1 bx bx-plus-circle"></i> Ekle</a>
+		<a href="/Admin/Newsletter/ExcelDownload" class="tableButton btn btn-info"><i class="tf-icons mb-1 bx bxs-download"></i> Excel</a>
+	</h4>
+	<div class="table-responsive text-nowrap">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Email</th>
+					<th>Tarih</th>
+					<th>Durum</th>
+					<th>Düzenle</th>
+					<th>Sil</th>
+				</tr>
+			</thead>
+			<tbody class="table-border-bottom-0">
+				@if (Model.TotalItemCount > 0)
+				{
+					@foreach (var newsletter in Model)
+					{
+						<tr>
+							@if (newsletter.Email.Length > 30)
+							{
+								<td>@newsletter.Email.Substring(0, newsletter.Email.Substring(0, 30).Length) ...</td>
+							}
+							else
+							{
+								<td>@newsletter.Email</td>
+							}
+							<td>@newsletter.Date.ToString("dd/MM/yyyy dddd")</td>
+							@if (newsletter.Status == true)
+							{
+								<td><a class="badge bg-label-success me-1" href="/Admin/Newsletter/ChangeStatus/@newsletter.Id">Aktif</a></td>
+							}
+							else
+							{
+								<td><a class="badge bg-label-danger me-1" href="/Admin/Newsletter/ChangeStatus/@newsletter.Id">Pasif</a></td>
+							}
+							<td><a class="badge bg-label-warning me-1" href="/Admin/Newsletter/Edit/@newsletter.Id">Düzenle</a></td>
+							<td><a class="badge bg-label-danger me-1" href="/Admin/Newsletter/Delete/@newsletter.Id" onclick="return confirm('Abonelik silinecek. Onaylıyor musun?')">Sil</a></td>
+						</tr>
+					}
+				}
+				else
+				{
+					<tr class="text-center">
+						<td colspan="5">Herhangi bir kayıt bulunamadı</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+	<div style="display:flex;justify-content:center;">
+		@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }),
+		new PagedListRenderOptions {
+		LiElementClasses = new string[] { "page-item" },
+		PageClasses = new string[] { "page-link" }
+		})
+	</div>
+</div>
