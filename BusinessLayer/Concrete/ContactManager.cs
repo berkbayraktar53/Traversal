@@ -3,6 +3,7 @@ using BusinessLayer.Abstract;
 using DataAccessLayer.Abstract;
 using System.Collections.Generic;
 using System.Linq;
+using DataAccessLayer.Concrete.EntityFramework;
 
 namespace BusinessLayer.Concrete
 {
@@ -43,6 +44,11 @@ namespace BusinessLayer.Concrete
 		public Contact GetById(int id)
 		{
 			return _contactDal.Get(p => p.Id == id);
+		}
+
+		public List<Contact> GetFourContactByActiveStatus()
+		{
+			return _contactDal.GetList(p => p.Status == true).TakeLast(4).OrderByDescending(p => p.Date).ToList();
 		}
 
 		public List<Contact> GetList()

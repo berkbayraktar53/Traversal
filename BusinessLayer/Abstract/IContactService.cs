@@ -12,5 +12,6 @@ namespace BusinessLayer.Abstract
 		Contact ChangeStatus(int id);
 		List<Contact> GetList();
 		List<Contact> GetListByActiveStatus();
+		List<Contact> GetFourContactByActiveStatus();
 	}
 }

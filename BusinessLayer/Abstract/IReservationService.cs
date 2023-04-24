@@ -12,6 +12,7 @@ namespace BusinessLayer.Abstract
 		Reservation GetReservationWithDestinationAndUser(int id);
 		Reservation ChangeStatus(int id);
 		List<Reservation> GetList();
+		List<Reservation> GetFourReservationByActiveStatus();
 		List<Reservation> GetListWithDestination();
 		List<Reservation> GetListWithDestinationAndUser();
 		List<Reservation> GetListWithDestinationByActiveStatus();

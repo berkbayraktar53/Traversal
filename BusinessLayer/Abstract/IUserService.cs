@@ -21,5 +21,6 @@ namespace BusinessLayer.Abstract
 		Task<IdentityResult> AddRole(Task<User> user, string roleName);
 		Task<IdentityResult> DeleteRole(Task<User> user, string roleName);
 		Task<List<User>> GetList();
+		Task<List<User>> GetListByActiveStatus();
 	}
 }

@@ -3,6 +3,7 @@ using EntityLayer.Concrete;
 using BusinessLayer.Abstract;
 using DataAccessLayer.Abstract;
 using System.Collections.Generic;
+using DataAccessLayer.Concrete.EntityFramework;
 
 namespace BusinessLayer.Concrete
 {
@@ -48,6 +49,11 @@ namespace BusinessLayer.Concrete
 		public Reservation GetById(int id)
 		{
 			return _reservationDal.Get(p => p.Id == id);
+		}
+
+		public List<Reservation> GetFourReservationByActiveStatus()
+		{
+			return _reservationDal.GetListWithDestinationAndUser().Where(p => p.Status == true).TakeLast(4).OrderByDescending(p => p.Date).ToList();
 		}
 
 		public List<Reservation> GetList()

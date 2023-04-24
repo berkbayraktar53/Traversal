@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
+using X.PagedList;
 using EntityLayer.Dtos;
 using System.Collections;
 using EntityLayer.Concrete;
@@ -97,6 +99,11 @@ namespace BusinessLayer.Concrete
 		public async Task<List<User>> GetList()
 		{
 			return await _userManager.Users.ToListAsync();
+		}
+
+		public async Task<List<User>> GetListByActiveStatus()
+		{
+			return await _userManager.Users.ToListAsync().Result.Where(p => p.Status == true).ToListAsync();
 		}
 
 		public async Task<bool> GetRoleExist(User user)
