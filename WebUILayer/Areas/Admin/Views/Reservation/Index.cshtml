@@ -1,0 +1,66 @@
+﻿@model IPagedList<Reservation>
+@{
+	ViewData["Title"] = "Rezervasyon Listesi";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+	<h4 class="card-header text-center">
+		<label class="labelClass">Toplam Rezervasyon Sayısı: @Model.TotalItemCount</label>
+		Rezervasyon Listesi
+		<a href="/Admin/Reservation/Add" class="tableButton btn btn-success"><i class="tf-icons mb-1 bx bx-plus-circle"></i> Ekle</a>
+		<a href="/Admin/Reservation/ExcelDownload" class="tableButton btn btn-info"><i class="tf-icons mb-1 bx bxs-download"></i> Excel</a>
+	</h4>
+	<div class="table-responsive text-nowrap">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Adı Soyadı</th>
+					<th>Rota</th>
+					<th>Tarih</th>
+					<th>Sonuç</th>
+					<th>Detay</th>
+					<th>Durum</th>
+					<th>Düzenle</th>
+					<th>Sil</th>
+				</tr>
+			</thead>
+			<tbody class="table-border-bottom-0">
+				@foreach (var reservation in Model)
+				{
+					<tr>
+						<td>@reservation.User.NameSurname</td>
+						@if (reservation.Destination.City.Length > 15)
+						{
+							<td>@reservation.Destination.City.Substring(0, @reservation.Destination.City.Substring(0, 15).Length) ...</td>
+						}
+						else
+						{
+							<td>@reservation.Destination.City</td>
+						}
+						<td>@reservation.Date.ToString("dd/MM/yyyy")</td>
+						<td>@reservation.ReservationStatus</td>
+						<td><a class="badge bg-label-info me-1" href="/Admin/Reservation/Detail/@reservation.Id">Detay</a></td>
+						@if (reservation.Status == true)
+						{
+							<td><a class="badge bg-label-success me-1" href="/Admin/Reservation/ChangeStatus/@reservation.Id">Aktif</a></td>
+						}
+						else
+						{
+							<td><a class="badge bg-label-danger me-1" href="/Admin/Reservation/ChangeStatus/@reservation.Id">Pasif</a></td>
+						}
+						<td><a class="badge bg-label-warning me-1" href="/Admin/Reservation/Edit/@reservation.Id">Düzenle</a></td>
+						<td><a class="badge bg-label-danger me-1" href="/Admin/Reservation/Delete/@reservation.Id" onclick="return confirm('Rezervasyon silinecek. Onaylıyor musun?')">Sil</a></td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+	<div style="display:flex;justify-content:center">
+		@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }),
+		new PagedListRenderOptions {
+		LiElementClasses = new string[] { "page-item" },
+		PageClasses = new string[] { "page-link" }
+		})
+	</div>
+</div>

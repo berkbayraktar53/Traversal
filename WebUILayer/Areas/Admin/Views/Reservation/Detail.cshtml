@@ -1,0 +1,62 @@
+﻿@model Reservation
+@{
+	ViewData["Title"] = "Rezervasyon Detayı";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-xxl">
+	<div class="card mb-4">
+		<div class="card-header text-center">
+			<h4 class="mb-0">Rezervasyon Detayı</h4>
+		</div>
+		<div class="card-body">
+			<form>
+				<div class="row mb-3">
+					<label class="col-sm-2 col-form-label">Adı Soyadı</label>
+					<div class="col-sm-4">
+						<input class="form-control" disabled asp-for="User.NameSurname" />
+					</div>
+					<label class="col-sm-2 col-form-label">Kişi Görsel</label>
+					<div class="col-sm-4">
+						<img src="~/images/user/@Model.User.UserImage" class="img-center" />
+					</div>
+				</div>
+				<div class="row mb-3">
+					<label class="col-sm-2 col-form-label">Rota</label>
+					<div class="col-sm-4">
+						<input class="form-control" disabled asp-for="Destination.City" />
+					</div>
+					<label class="col-sm-2 col-form-label">Rota Görsel</label>
+					<div class="col-sm-4">
+						<img src="~/images/destination/@Model.Destination.Image" class="img-center" />
+					</div>
+				</div>
+				<div class="row mb-3">
+					<label class="col-sm-2 col-form-label">Kişi Sayısı</label>
+					<div class="col-sm-4">
+						<input class="form-control" disabled asp-for="PersonCount" />
+					</div>
+					<label class="col-sm-2 col-form-label">Açıklama</label>
+					<div class="col-sm-4">
+						<input class="form-control" disabled asp-for="Description" />
+					</div>
+				</div>
+				<div class="row mb-3">
+					<label class="col-sm-2 col-form-label">Tarih</label>
+					<div class="col-sm-4">
+						<input class="form-control" disabled value="@Model.Date.ToString("dd/MM/yyyy dddd")" />
+					</div>
+					<label class="col-sm-2 col-form-label">Sonuç</label>
+					<div class="col-sm-4">
+						<input class="form-control" disabled asp-for="ReservationStatus" />
+					</div>
+				</div>
+				<div class="row justify-content-end text-center">
+					<div class="col-sm-12">
+						<a href="/Admin/Reservation/Index" class="btn btn-primary" style="color:white">Geri Dön</a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

@@ -8,13 +8,11 @@ namespace BusinessLayer.Concrete
 {
 	public class ReservationManager : IReservationService
 	{
-		private readonly IDestinationService _destinationService;
 		private readonly IReservationDal _reservationDal;
 		private readonly IUserService _userService;
 
-		public ReservationManager(IDestinationService destinationService, IReservationDal reservationDal, IUserService userService)
+		public ReservationManager(IReservationDal reservationDal, IUserService userService)
 		{
-			_destinationService = destinationService;
 			_reservationDal = reservationDal;
 			_userService = userService;
 		}
@@ -27,6 +25,31 @@ namespace BusinessLayer.Concrete
 			_reservationDal.Add(reservation);
 		}
 
+		public Reservation ChangeStatus(int id)
+		{
+			var result = GetById(id);
+			if (result.Status == true)
+			{
+				result.Status = false;
+			}
+			else
+			{
+				result.Status = true;
+			}
+			Update(result);
+			return result;
+		}
+
+		public void Delete(Reservation reservation)
+		{
+			_reservationDal.Delete(reservation);
+		}
+
+		public Reservation GetById(int id)
+		{
+			return _reservationDal.Get(p => p.Id == id);
+		}
+
 		public List<Reservation> GetList()
 		{
 			return _reservationDal.GetList();
@@ -35,6 +58,11 @@ namespace BusinessLayer.Concrete
 		public List<Reservation> GetListWithDestination()
 		{
 			return _reservationDal.GetListWithDestination().OrderByDescending(p => p.Date).ToList();
+		}
+
+		public List<Reservation> GetListWithDestinationAndUser()
+		{
+			return _reservationDal.GetListWithDestinationAndUser().OrderByDescending(p => p.Date).ToList();
 		}
 
 		public List<Reservation> GetListWithDestinationByActiveStatus()
@@ -55,6 +83,16 @@ namespace BusinessLayer.Concrete
 		public List<Reservation> GetListWithReservationByWaitAprroval(int id)
 		{
 			return GetListWithDestinationByActiveStatus().Where(p => p.ReservationStatus == "Onay Bekliyor").ToList();
+		}
+
+		public Reservation GetReservationWithDestinationAndUser(int id)
+		{
+			return _reservationDal.GetReservationWithDestinationAndUser(id);
+		}
+
+		public void Update(Reservation reservation)
+		{
+			_reservationDal.Update(reservation);
 		}
 	}
 }
