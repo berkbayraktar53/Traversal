@@ -1,0 +1,80 @@
+﻿@model IPagedList<Contact>
+@{
+	ViewData["Title"] = "İletişim Listesi";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+	<h4 class="card-header text-center">
+		<label class="labelClass">Toplam İletişim Sayısı: @Model.TotalItemCount</label>
+		Rehber Listesi
+		<a href="/Admin/Contact/Add" class="tableButton btn btn-success"><i class="tf-icons mb-1 bx bx-plus-circle"></i> Ekle</a>
+		<a href="/Admin/Contact/ExcelDownload" class="tableButton btn btn-info"><i class="tf-icons mb-1 bx bxs-download"></i> Excel</a>
+	</h4>
+	<div class="table-responsive text-nowrap">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Ad Soyad</th>
+					<th>Email</th>
+					<th>Konu</th>
+					<th>Mesaj</th>
+					<th>Tarih</th>
+					<th>Durum</th>
+					<th>Düzenle</th>
+					<th>Sil</th>
+				</tr>
+			</thead>
+			<tbody class="table-border-bottom-0">
+				@foreach (var contact in Model)
+				{
+					<tr>
+						<td>@contact.NameSurname</td>
+						@if (contact.Email.Length > 10)
+						{
+							<td>@contact.Email.Substring(0, contact.Email.Substring(0, 10).Length) ...</td>
+						}
+						else
+						{
+							<td>@contact.Email</td>
+						}
+						@if (contact.Subject.Length > 10)
+						{
+							<td>@contact.Subject.Substring(0, contact.Subject.Substring(0, 10).Length) ...</td>
+						}
+						else
+						{
+							<td>@contact.Subject</td>
+						}
+						@if (contact.Message.Length > 10)
+						{
+							<td>@contact.Message.Substring(0, contact.Message.Substring(0, 10).Length) ...</td>
+						}
+						else
+						{
+							<td>@contact.Message</td>
+						}
+						<td>@contact.Date.ToString("dd/MM/yyyy")</td>
+						@if (contact.Status == true)
+						{
+							<td><a class="badge bg-label-success me-1" href="/Admin/Contact/ChangeStatus/@contact.Id">Aktif</a></td>
+						}
+						else
+						{
+							<td><a class="badge bg-label-danger me-1" href="/Admin/Contact/ChangeStatus/@contact.Id">Pasif</a></td>
+						}
+						<td><a class="badge bg-label-warning me-1" href="/Admin/Contact/Edit/@contact.Id">Düzenle</a></td>
+						<td><a class="badge bg-label-danger me-1" href="/Admin/Contact/Delete/@contact.Id" onclick="return confirm('İletişim silinecek. Onaylıyor musun?')">Sil</a></td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+	<div style="display:flex;justify-content:center;">
+		@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }),
+		new PagedListRenderOptions {
+		LiElementClasses = new string[] { "page-item" },
+		PageClasses = new string[] { "page-link" }
+		})
+	</div>
+</div>
