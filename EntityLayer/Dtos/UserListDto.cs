@@ -6,6 +6,7 @@ namespace EntityLayer.Dtos
 	{
 		public int Id { get; set; }
 		public IFormFile UserImage { get; set; }
+		public string Image { get; set; }
 		public string NameSurname { get; set; }
 		public string UserName { get; set; }
 		public string Email { get; set; }

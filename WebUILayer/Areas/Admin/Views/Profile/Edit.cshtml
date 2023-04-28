@@ -1,0 +1,64 @@
+﻿@model UserListDto
+@{
+	ViewData["Title"] = "Profili Düzenle";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="card mb-4">
+			<h5 class="card-header text-center" style="margin-right:10px">Profilim</h5>
+			<div class="card-body">
+				<form action="Edit" method="post" enctype="multipart/form-data">
+					<input type="hidden" asp-for="Id" />
+					<input type="hidden" asp-for="Status" />
+					<div class="row">
+						<div class="d-flex align-items-start align-items-sm-center gap-4" style="display:flex;justify-content:center">
+							<img src="~/images/user/user.png" class="d-block rounded" height="100" width="100" id="pictureShown" />
+							<div class="button-wrapper">
+								<label for="userImage" class="btn btn-primary me-2 mb-4" tabindex="0">
+									<span class="d-none d-sm-block">Fotoğraf Yükle</span>
+									<i class="bx bx-upload d-block d-sm-none"></i>
+									<input type="file" asp-for="UserImage" id="userImage" class="account-file-input" hidden accept="image/png, image/jpeg" />
+								</label>
+								<span asp-validation-for="UserImage" class="spanClass"></span>
+							</div>
+						</div>
+						<div class="mb-3 col-md-6">
+							<label class="form-label">Adı Soyadı</label>
+							<input class="form-control" type="text" asp-for="NameSurname" autocomplete="off" />
+							<span asp-validation-for="NameSurname" class="spanClass"></span>
+						</div>
+						<div class="mb-3 col-md-6">
+							<label class="form-label">Hakkında</label>
+							<input class="form-control" type="text" asp-for="AboutUser" autocomplete="off" />
+							<span asp-validation-for="AboutUser" class="spanClass"></span>
+						</div>
+						<div class="mb-3 col-md-6">
+							<label class="form-label">Email</label>
+							<input class="form-control" type="email" asp-for="Email" autocomplete="off" />
+							<span asp-validation-for="Email" class="spanClass"></span>
+						</div>
+						<div class="mb-3 col-md-6">
+							<label class="form-label">Şifre</label>
+							<input class="form-control" type="password" asp-for="Password" autocomplete="off" />
+							<span asp-validation-for="Password" class="spanClass"></span>
+						</div>
+					</div>
+					<div class="mt-2 text-center">
+						<button type="submit" class="btn btn-success me-2">Güncelle</button>
+						<a href="/Admin/Profile/Index" class="btn btn-primary me-2">Geri Dön</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="~/templates/admin/assets/vendor/libs/jquery/jquery.js"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		$("#userImage").change(function (e) {
+			$("#pictureShown").attr('src', URL.createObjectURL(e.target.files[0]));
+		});
+	});
+</script>

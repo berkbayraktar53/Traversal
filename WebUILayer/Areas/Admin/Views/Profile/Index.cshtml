@@ -1,0 +1,49 @@
+﻿@model User
+@{
+	ViewData["Title"] = "Profilim";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="card mb-4">
+			<h5 class="card-header text-center" style="margin-right:10px">Profilim</h5>
+			<div class="card-body">
+				<form action="Index" method="post" enctype="multipart/form-data">
+					<div class="row">
+						<div class="d-flex align-items-start align-items-sm-center gap-4" style="display:flex;justify-content:center">
+							<img src="~/images/user/@Model.UserImage" class="d-block rounded" height="100" width="100" id="pictureShown" />
+						</div>
+						<div class="mb-3 col-md-6">
+							<label class="form-label">Adı Soyadı</label>
+							<input class="form-control" type="text" asp-for="NameSurname" readonly />
+						</div>
+						<div class="mb-3 col-md-6">
+							<label class="form-label">Hakkında</label>
+							<input class="form-control" type="text" asp-for="AboutUser" readonly />
+						</div>
+						<div class="mb-3 col-md-6">
+							<label class="form-label">Email</label>
+							<input class="form-control" type="email" asp-for="Email" readonly />
+						</div>
+						<div class="mb-3 col-md-6">
+							<label class="form-label">Şifre</label>
+							<input class="form-control" type="password" value="**********" asp-for="NameSurname" readonly />
+						</div>
+					</div>
+					<div class="mt-2 text-center">
+						<a href="/Admin/Profile/Edit" class="btn btn-primary me-2">Profili Düzenle</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="~/templates/admin/assets/vendor/libs/jquery/jquery.js"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		$("#userImage").change(function (e) {
+			$("#pictureShown").attr('src', URL.createObjectURL(e.target.files[0]));
+		});
+	});
+</script>
