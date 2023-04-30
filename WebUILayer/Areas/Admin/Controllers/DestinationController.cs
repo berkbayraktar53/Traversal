@@ -1,9 +1,10 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
+using System.Linq;
 using X.PagedList;
 using OfficeOpenXml;
 using EntityLayer.Dtos;
 using EntityLayer.Concrete;
+using System.Globalization;
 using BusinessLayer.Abstract;
 using System.Threading.Tasks;
 using FluentValidation.Results;
@@ -145,6 +146,19 @@ namespace WebUILayer.Areas.Admin.Controllers
 			_fileService.FileDelete(result.Image, folderName);
 			_notyfService.Success("Rota silindi");
 			return RedirectToAction("Index", "Destination");
+		}
+
+		public IActionResult GetCitiesSearchByName(string searchString)
+		{
+			ViewBag.searchString = searchString;
+			var getCityName = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(searchString.ToLower());
+			var getDescriptionName = searchString.ToLower();
+			var values = _destinationService.GetListByActiveStatus();
+			if (!string.IsNullOrEmpty(searchString))
+			{
+				values = values.Where(y => y.City.Contains(getCityName) || y.Description.Contains(getDescriptionName)).ToList();
+			}
+			return View(values.ToPagedList(1, 4));
 		}
 
 		public IActionResult ExcelDownload()
