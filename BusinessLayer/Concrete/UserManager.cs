@@ -96,9 +96,14 @@ namespace BusinessLayer.Concrete
 			return _userManager.FindByNameAsync(_httpContextAccessor.HttpContext.User.Identity.Name).Result;
 		}
 
+		public async Task<User> GetByEmail(string email)
+		{
+			return await _userManager.FindByEmailAsync(email);
+		}
+
 		public async Task<List<User>> GetList()
 		{
-			return await _userManager.Users.ToListAsync();
+			return await _userManager.Users.OrderByDescending(p => p.Id).ToListAsync();
 		}
 
 		public async Task<List<User>> GetListByActiveStatus()
@@ -128,6 +133,31 @@ namespace BusinessLayer.Concrete
 			user.Status = userListDto.Status;
 			user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, userListDto.Password);
 			await _userManager.UpdateAsync(user);
+		}
+
+		public Task<bool> IsInRole(User user, string roleName)
+		{
+			roleName = "Member";
+			return _userManager.IsInRoleAsync(user, roleName);
+		}
+
+		public async Task UpdateMember(UserListDto userListDto)
+		{
+			var user = GetById(userListDto.Id).Result;
+			user.Id = userListDto.Id;
+			user.UserImage = _fileService.UserFileSave(userListDto.UserImage, user.UserImage);
+			user.NameSurname = userListDto.NameSurname;
+			user.AboutUser = userListDto.AboutUser;
+			user.UserName = userListDto.Email;
+			user.Email = userListDto.Email;
+			user.Status = userListDto.Status;
+			user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, userListDto.Password);
+			await _userManager.UpdateAsync(user);
+		}
+
+		public async Task<IList<string>> GetRoles(User user)
+		{
+			return await _userManager.GetRolesAsync(user);
 		}
 	}
 }

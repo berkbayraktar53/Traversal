@@ -1,8 +1,36 @@
-﻿
+﻿@model List<RoleAssignViewModel>
 @{
-    ViewData["Title"] = "AssignRole";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "Rol Ata";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h1>AssignRole</h1>
-
+<div class="row">
+	<div class="col-xl-12">
+		<div class="card mb-4">
+			<form asp-action="AssignRole">
+				<h5 class="card-header text-center">@ViewBag.userName'in Sahip Olduğu Roller</h5>
+				<div class="card-body" style="display:flex;justify-content:center">
+					<div class="row gy-3">
+						<div class="col-md">
+							@for (int i = 0; i < Model.Count; i++)
+							{
+								<input type="hidden" asp-for="@Model[i].RoleId" />
+								<input type="hidden" asp-for="@Model[i].RoleName" />
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" asp-for="@Model[i].RoleExist" id="defaultCheck1" />
+									<label class="form-check-label" for="defaultCheck1">@Model[i].RoleName</label>
+								</div>
+							}
+						</div>
+					</div>
+				</div>
+				<div class="row gy-3">
+					<div class="col-sm-12 col-sm-offset-2 text-center">
+						<button class="btn btn-success" type="submit">Kaydet</button>
+						<a href="/Admin/User/Index" class="btn btn-primary" type="submit">Geri Dön</a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

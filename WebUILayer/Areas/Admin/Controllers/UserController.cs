@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using WebUILayer.Areas.Admin.Models;
 using AspNetCoreHero.ToastNotification.Abstractions;
 using BusinessLayer.ValidationRules.FluentValidation;
+using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace WebUILayer.Areas.Admin.Controllers
 {
@@ -44,8 +45,10 @@ namespace WebUILayer.Areas.Admin.Controllers
 		public async Task<IActionResult> AssignRole(int id)
 		{
 			var user = await _userService.GetById(id);
+			ViewBag.userName = user.NameSurname;
 			TempData["userId"] = user.Id;
 			var roles = await _roleService.GetList();
+			var userRoles = await _userService.GetRoles(user);
 			List<RoleAssignViewModel> roleAssignViewModels = new();
 			foreach (var role in roles)
 			{
@@ -53,7 +56,7 @@ namespace WebUILayer.Areas.Admin.Controllers
 				{
 					RoleId = role.Id,
 					RoleName = role.Name,
-					RoleExist = await _userService.GetRoleExist(user)
+					RoleExist = userRoles.Contains(role.Name)
 				};
 				roleAssignViewModels.Add(roleAssignViewModel);
 			}
@@ -93,6 +96,8 @@ namespace WebUILayer.Areas.Admin.Controllers
 			if (validationResult.IsValid)
 			{
 				await _userService.Add(userListDto);
+				var getUser = _userService.GetByEmail(userListDto.Email);
+				await _userService.AddRole(getUser, "Member");
 				_notyfService.Success("Kullanıcı Eklendi");
 				return RedirectToAction("Index", "User");
 			}
@@ -107,9 +112,9 @@ namespace WebUILayer.Areas.Admin.Controllers
 			}
 		}
 
-		public IActionResult ChangeStatus(int id)
+		public async Task<IActionResult> ChangeStatus(int id)
 		{
-			_userService.ChangeStatus(id);
+			await _userService.ChangeStatus(id);
 			_notyfService.Success("Durum Değiştirildi");
 			return RedirectToAction("Index", "User");
 		}
@@ -117,8 +122,17 @@ namespace WebUILayer.Areas.Admin.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Edit(int id)
 		{
-			var values = await _userService.ChangeStatus(id);
-			return View(values);
+			var user = await _userService.GetById(id);
+			UserListDto userListDto = new()
+			{
+				Id = user.Id,
+				AboutUser = user.AboutUser,
+				Email = user.Email,
+				NameSurname = user.NameSurname,
+				UserName = user.UserName,
+				Status = user.Status
+			};
+			return View(userListDto);
 		}
 
 		[HttpPost]
@@ -128,7 +142,7 @@ namespace WebUILayer.Areas.Admin.Controllers
 			ValidationResult validationResult = userValidator.Validate(userListDto);
 			if (validationResult.IsValid)
 			{
-				await _userService.Update(userListDto);
+				await _userService.UpdateMember(userListDto);
 				_notyfService.Success("Kullanıcı Güncellendi");
 				return RedirectToAction("Index", "User");
 			}
@@ -148,6 +162,12 @@ namespace WebUILayer.Areas.Admin.Controllers
 			if (id != 0)
 			{
 				var values = await _userService.GetById(id);
+				bool isInRole = await _userService.IsInRole(values, "Member");
+				if (isInRole)
+				{
+					var getUser = _userService.GetByEmail(values.Email);
+					await _userService.DeleteRole(getUser, "Member");
+				}
 				await _userService.Delete(values);
 				_notyfService.Success("Kullanıcı Silindi");
 				return RedirectToAction("Index", "User");
@@ -170,18 +190,16 @@ namespace WebUILayer.Areas.Admin.Controllers
 			workSheet.Cells[1, 3].Value = "Adı Soyadı";
 			workSheet.Cells[1, 4].Value = "Kullanıcı Adı";
 			workSheet.Cells[1, 5].Value = "Hakkında";
-			workSheet.Cells[1, 6].Value = "Email";
-			workSheet.Cells[1, 7].Value = "Durum";
+			workSheet.Cells[1, 6].Value = "Durum";
 			int rowCount = 2, count = 1;
 			foreach (var user in await _userService.GetList())
 			{
 				workSheet.Cells[rowCount, 1].Value = count++;
-				workSheet.Cells[rowCount, 2].Value = "/memberimages/" + user.UserImage;
+				workSheet.Cells[rowCount, 2].Value = "/images/user/" + user.UserImage;
 				workSheet.Cells[rowCount, 3].Value = user.NameSurname;
 				workSheet.Cells[rowCount, 4].Value = user.UserName;
 				workSheet.Cells[rowCount, 5].Value = user.AboutUser;
-				workSheet.Cells[rowCount, 6].Value = user.Email;
-				workSheet.Cells[rowCount, 7].Value = (user.Status == true ? "AKTİF" : "PASİF");
+				workSheet.Cells[rowCount, 6].Value = (user.Status == true ? "Aktif" : "Pasif");
 				rowCount++;
 			}
 			var stream = new MemoryStream();
