@@ -59,7 +59,7 @@ namespace BusinessLayer.Concrete
 
 		public List<Guide> GetListByActiveStatus()
 		{
-			return _guideDal.GetList(p => p.Status == true);
+			return _guideDal.GetList(p => p.Status == true).OrderByDescending(p => p.Id).ToList();
 		}
 
 		public void Update(Guide guide)

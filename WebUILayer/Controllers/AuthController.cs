@@ -1,5 +1,6 @@
 ﻿using EntityLayer.Dtos;
 using EntityLayer.Concrete;
+using BusinessLayer.Abstract;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
@@ -12,12 +13,14 @@ namespace WebUILayer.Controllers
 	public class AuthController : Controller
 	{
 		private readonly INotyfService _notyfService;
+		private readonly IUserService _userService;
 		private readonly SignInManager<User> _signInManager;
 		private readonly UserManager<User> _userManager;
 
-		public AuthController(INotyfService notyfService, SignInManager<User> signInManager, UserManager<User> userManager)
+		public AuthController(INotyfService notyfService, IUserService userService, SignInManager<User> signInManager, UserManager<User> userManager)
 		{
 			_notyfService = notyfService;
+			_userService = userService;
 			_signInManager = signInManager;
 			_userManager = userManager;
 		}
@@ -86,6 +89,8 @@ namespace WebUILayer.Controllers
 					var result = await _userManager.CreateAsync(user, userRegisterDto.Password);
 					if (result.Succeeded)
 					{
+						var getUser = _userService.GetByEmail(user.Email);
+						await _userService.AddRole(getUser, "Member");
 						_notyfService.Success("Kayıt başarılı");
 						return RedirectToAction("Login", "Auth");
 					}

@@ -78,17 +78,17 @@ namespace BusinessLayer.Concrete
 
 		public List<Reservation> GetListWithReservationByAccepted(int id)
 		{
-			return GetListWithDestinationByActiveStatus().Where(p => p.ReservationStatus == "Onaylandı").ToList();
+			return _reservationDal.GetListWithDestination().Where(p => (p.Status == true) && (p.ReservationStatus == "Onaylandı") && (p.UserId == id)).ToList();
 		}
 
 		public List<Reservation> GetListWithReservationByPrevious(int id)
 		{
-			return GetListWithDestinationByActiveStatus().Where(p => p.ReservationStatus == "Geçmiş Rezervasyon").ToList();
+			return _reservationDal.GetListWithDestination().Where(p => (p.Status == true) && (p.ReservationStatus == "Geçmiş Rezervasyon") && (p.UserId == id)).ToList();
 		}
 
 		public List<Reservation> GetListWithReservationByWaitAprroval(int id)
 		{
-			return GetListWithDestinationByActiveStatus().Where(p => p.ReservationStatus == "Onay Bekliyor").ToList();
+			return _reservationDal.GetListWithDestination().Where(p => (p.Status == true) && (p.ReservationStatus == "Onay Bekliyor") && (p.UserId == id)).ToList();
 		}
 
 		public Reservation GetReservationWithDestinationAndUser(int id)

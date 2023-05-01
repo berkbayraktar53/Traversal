@@ -40,8 +40,8 @@
                     <div class="col-lg-6 col-md-12 column pl-lg-5 column4 mt-lg-0 mt-5">
                         <h3>Haber Bülteni</h3>
                         <div class="end-column">
-                            <form asp-action="Index" asp-controller="Contact" class="subscribe" method="post">
-                                <input type="email" name="email" placeholder="Email Adresi" />
+                            <form asp-action="Add" asp-controller="Newsletter" class="subscribe" method="post">
+                                <input type="email" name="email" placeholder="Email Adresi" autocomplete="off" required />
                                 <button type="submit">Abone Ol</button>
                             </form>
                             <p>Siteye abone olun, son haberler mail adresinize gelsin</p>
