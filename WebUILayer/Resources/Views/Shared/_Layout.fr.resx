@@ -117,22 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Bugün" xml:space="preserve">
-    <value>Today</value>
+  <data name="Almanca" xml:space="preserve">
+    <value>Allemand</value>
   </data>
-  <data name="Harikasın" xml:space="preserve">
-    <value>You are great</value>
+  <data name="Anasayfa" xml:space="preserve">
+    <value>Page d'accueil</value>
   </data>
-  <data name="Hava" xml:space="preserve">
-    <value>Weather</value>
+  <data name="Dil Seçin" xml:space="preserve">
+    <value>Choisir la langue</value>
   </data>
-  <data name="Merhaba" xml:space="preserve">
-    <value>Hello</value>
+  <data name="Fransızca" xml:space="preserve">
+    <value>Français</value>
   </data>
-  <data name="Teşekkür ederim" xml:space="preserve">
-    <value>Thank you</value>
+  <data name="Hakkımızda" xml:space="preserve">
+    <value>À propos</value>
   </data>
-  <data name="Çok güzel" xml:space="preserve">
-    <value>Very good</value>
+  <data name="Rehberlerimiz" xml:space="preserve">
+    <value>Guider</value>
+  </data>
+  <data name="Rezervasyon Yap" xml:space="preserve">
+    <value>Réservation</value>
+  </data>
+  <data name="Rotalar" xml:space="preserve">
+    <value>Itinéraires</value>
+  </data>
+  <data name="Türkçe" xml:space="preserve">
+    <value>Turc</value>
+  </data>
+  <data name="İletişim" xml:space="preserve">
+    <value>Communication</value>
+  </data>
+  <data name="İngilizce" xml:space="preserve">
+    <value>Anglais</value>
+  </data>
+  <data name="İspanyolca" xml:space="preserve">
+    <value>Espagnol</value>
+  </data>
+  <data name="İtalyanca" xml:space="preserve">
+    <value>Italien</value>
   </data>
 </root>

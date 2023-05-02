@@ -117,31 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Aktif Rezervasyon" xml:space="preserve">
-    <value>Active Reservation</value>
+  <data name="Almanca" xml:space="preserve">
+    <value>Almanca</value>
   </data>
   <data name="Anasayfa" xml:space="preserve">
-    <value>Home Page</value>
+    <value>Anasayfa</value>
   </data>
-  <data name="Geçmiş Rezervasyon" xml:space="preserve">
-    <value>Past Reservation</value>
+  <data name="Dil Seçin" xml:space="preserve">
+    <value>Dil Seçin</value>
   </data>
-  <data name="Profilim" xml:space="preserve">
-    <value>My Profile</value>
+  <data name="Fransızca" xml:space="preserve">
+    <value>Fransızca</value>
   </data>
-  <data name="Siteye Git" xml:space="preserve">
-    <value>Go To The Site</value>
+  <data name="Hakkımızda" xml:space="preserve">
+    <value>Hakkımızda</value>
   </data>
-  <data name="Tur Rotaları" xml:space="preserve">
-    <value>Tour Routes</value>
+  <data name="Rehberlerimiz" xml:space="preserve">
+    <value>Rehberlerimiz</value>
   </data>
-  <data name="Yeni Rezervasyon" xml:space="preserve">
-    <value>New Reservation</value>
+  <data name="Rezervasyon Yap" xml:space="preserve">
+    <value>Rezervasyon Yap</value>
   </data>
-  <data name="Yorumlarım" xml:space="preserve">
-    <value>My Comments</value>
+  <data name="Rotalar" xml:space="preserve">
+    <value>Rotalar</value>
   </data>
-  <data name="Çıkış Yap" xml:space="preserve">
-    <value>Log Out</value>
+  <data name="Türkçe" xml:space="preserve">
+    <value>Türkçe</value>
+  </data>
+  <data name="İletişim" xml:space="preserve">
+    <value>İletişim</value>
+  </data>
+  <data name="İngilizce" xml:space="preserve">
+    <value>İngilizce</value>
+  </data>
+  <data name="İspanyolca" xml:space="preserve">
+    <value>İspanyolca</value>
+  </data>
+  <data name="İtalyanca" xml:space="preserve">
+    <value>İtalyanca</value>
   </data>
 </root>
