@@ -25,6 +25,7 @@ namespace WebUILayer.Controllers
 
         public IActionResult Detail(int id)
         {
+            ViewBag.destinationId = id;
             var result = _destinationService.GetById(id);
             return View(result);
         }

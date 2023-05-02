@@ -12,6 +12,7 @@ namespace BusinessLayer.Abstract
 		Comment GetById(int id);
 		List<Comment> GetList();
 		List<Comment> GetListByActiveStatus();
+		List<Comment> GetListByDestination(int destinationId);
 		List<Comment> GetCommentListWithDestinationAndUser();
 		List<Comment> GetCommentListWithDestinationAndUserByActiveStatus();
 	}

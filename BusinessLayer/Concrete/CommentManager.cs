@@ -71,5 +71,10 @@ namespace BusinessLayer.Concrete
 		{
 			return _commentDal.GetList();
 		}
+
+		public List<Comment> GetListByDestination(int destinationId)
+		{
+			return _commentDal.GetList(p => p.Status == true).Where(p => p.DestinationId == destinationId).OrderByDescending(p => p.CommentDate).ToList();
+		}
 	}
 }
