@@ -1,55 +1,61 @@
 ﻿@model Destination
 @{
-    ViewData["Title"] = "Detail";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "Detail";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <section class="w3l-about-breadcrumb text-left">
-    <div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
-        <div class="container">
-            <h2 class="title">Tur Detayı</h2>
-            <ul class="breadcrumbs-custom-path mt-2">
-                <li><a href="/Destination/Index">Rotalar</a></li>
-                <li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span>Detay</li>
-            </ul>
-        </div>
-    </div>
+	<div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
+		<div class="container">
+			<h2 class="title">Tur Detayı</h2>
+			<ul class="breadcrumbs-custom-path mt-2">
+				<li><a href="/Destination/Index">Rotalar</a></li>
+				<li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span>Detay</li>
+			</ul>
+		</div>
+	</div>
 </section>
 <div class="py-5 w3l-homeblock1 text-center">
-    <div class="container mt-md-3">
-        <h3 class="blog-desc-big text-center mb-4">
-            @Model.City Turu
-        </h3>
-    </div>
+	<div class="container mt-md-3">
+		<h3 class="blog-desc-big text-center mb-4">
+			@Model.City Turu
+		</h3>
+	</div>
 </div>
 <section class="blog-post-main w3l-homeblock1">
-    <div class="blog-content-inf pb-5">
-        <div class="container pb-lg-4">
-            <div class="single-post-image">
-                <div class="post-content text-center">
-                    <img src="~/images/destination/@Model.Image" style="width:600px;height:350px;" class="radius-image img-fluid mb-5" alt="resim bulunamadı" />
-                </div>
-            </div>
-            <div class="single-post-content">
-                <p class="mb-4">@Model.Description</p>
-                <div class="d-grid left-right mt-5 pb-md-5">
-                    <div class="buttons-singles tags">
-                        <h4>Etiketler :</h4>
-                        <a href="/Destination/Index">Tur Rotaları</a>
-                        <a href="/Guide/Index">Tur Rehberleri</a>
-                        <a href="/About/Index">Firmamız</a>
-                    </div>
-                    <div class="buttons-singles">
-                        <h4>Paylaş :</h4>
-                        <a href="#blog-share"><span class="fa fa-facebook" aria-hidden="true"></span></a>
-                        <a href="#blog-share"><span class="fa fa-twitter" aria-hidden="true"></span></a>
-                        <a href="#blog-share"><span class="fa fa-google-plus" aria-hidden="true"></span></a>
-                        <a href="#blog-share"><span class="fa fa-pinterest-p" aria-hidden="true"></span></a>
-                    </div>
-                </div>
-                @await Component.InvokeAsync("CommentList", new { id = ViewBag.destinationId })
-                @await Html.PartialAsync("~/Views/Comment/Add.cshtml", new { id = ViewBag.destinationId })
-            </div>
-        </div>
-    </div>
+	<div class="blog-content-inf pb-5">
+		<div class="container pb-lg-4">
+			<div class="single-post-image">
+				<div class="post-content text-center">
+					<img src="~/images/destination/@Model.Image" style="width:600px;height:350px;" class="radius-image img-fluid mb-5" alt="resim bulunamadı" />
+				</div>
+			</div>
+			<div class="single-post-content">
+				<p class="mb-0">► @Model.Date.ToString("dd MMMM yyyy dddd") günü tur başlangıcı olacak</p>
+				<p class="mb-0">► @Model.DayNight konaklama yapılacak</p>
+				<p class="mb-0">► @Model.Capacity kişilik kapasite mevcut</p>
+				<p class="mb-0">► @String.Format("{0:N0}", Model.Price) ₺ olarak ücret belirlendi</p>
+				<p class="mb-0">@Html.Raw(@Model.Description)</p>
+				<div class="d-grid left-right mt-5 pb-md-5">
+					<div class="buttons-singles tags">
+						<h4>Etiketler :</h4>
+						<a href="/Destination/Index">Tur Rotaları</a>
+						<a href="/Guide/Index">Tur Rehberleri</a>
+						<a href="/About/Index">Firmamız</a>
+					</div>
+					<div class="buttons-singles">
+						<h4>Paylaş :</h4>
+						<a href="#blog-share"><span class="fa fa-facebook" aria-hidden="true"></span></a>
+						<a href="#blog-share"><span class="fa fa-twitter" aria-hidden="true"></span></a>
+						<a href="#blog-share"><span class="fa fa-google-plus" aria-hidden="true"></span></a>
+						<a href="#blog-share"><span class="fa fa-pinterest-p" aria-hidden="true"></span></a>
+					</div>
+				</div>
+				@await Component.InvokeAsync("CommentList", new { id = ViewBag.destinationId })
+				@await Html.PartialAsync("~/Views/Comment/Add.cshtml", new { id = ViewBag.destinationId })
+			</div>
+		</div>
+	</div>
 </section>
+<script src="~/ckeditor/ckeditor.js"></script>
+<script src="~/ckeditor/styles.js"></script>

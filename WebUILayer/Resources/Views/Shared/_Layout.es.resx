@@ -129,6 +129,9 @@
   <data name="Fransızca" xml:space="preserve">
     <value>Francés</value>
   </data>
+  <data name="Giriş Yap" xml:space="preserve">
+    <value>Acceso</value>
+  </data>
   <data name="Hakkımızda" xml:space="preserve">
     <value>Acerca de</value>
   </data>

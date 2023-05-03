@@ -54,7 +54,7 @@
 				<div class="row mb-3">
 					<label class="col-sm-2 col-form-label">Açıklama</label>
 					<div class="col-sm-10">
-						<textarea class="form-control" rows="2" asp-for="Description"></textarea>
+						<textarea class="form-control" rows="2" id="editor" asp-for="Description"></textarea>
 						<span class="spanClass" asp-validation-for="Description"></span>
 					</div>
 				</div>
@@ -69,6 +69,7 @@
 	</div>
 </div>
 <script src="~/templates/admin/assets/vendor/libs/jquery/jquery.js"></script>
+<script src="~/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
 	$(document).ready(function () {
 		$("#destinationImage").change(function (e) {
@@ -77,4 +78,7 @@
 		$("#price").val(0)
 		$("#capacity").val(0)
 	});
+</script>
+<script type="text/javascript">
+	CKEDITOR.replace("editor")
 </script>
