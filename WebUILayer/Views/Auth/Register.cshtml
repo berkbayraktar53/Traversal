@@ -21,19 +21,19 @@
             <form asp-action="Register" method="post">
                 <h3>Hesap Oluştur</h3>
                 <div class="form-holder">
-                    <input type="text" class="form-control" name="NameSurname" placeholder="Ad Soyad">
+                    <input type="text" class="form-control" name="NameSurname" placeholder="Ad Soyad" autocomplete="off" />
                 </div>
                 <span class="text-danger" asp-validation-for="NameSurname"></span>
                 <div class="form-holder">
-                    <input type="text" class="form-control" name="Email" placeholder="Email">
+                    <input type="text" class="form-control" name="Email" placeholder="Email" autocomplete="off" />
                 </div>
                 <span class="text-danger" asp-validation-for="Email"></span>
                 <div class="form-holder">
-                    <input type="password" class="form-control" name="Password" placeholder="Şifre">
+                    <input type="password" class="form-control" name="Password" placeholder="Şifre" autocomplete="off" />
                 </div>
                 <span class="text-danger" asp-validation-for="Password"></span>
                 <div class="form-holder">
-                    <input type="password" class="form-control" name="ConfirmPassword" placeholder="Şifre Tekrar">
+                    <input type="password" class="form-control" name="ConfirmPassword" placeholder="Şifre Tekrar" autocomplete="off" />
                 </div>
                 <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
                 <div class="text-danger" asp-validation-summary="ModelOnly"></div>

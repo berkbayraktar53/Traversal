@@ -4,6 +4,7 @@ using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Razor;
 using AspNetCoreHero.ToastNotification;
 using Microsoft.AspNetCore.Authorization;
@@ -38,6 +39,7 @@ namespace WebUILayer
 			services.AddIdentity<User, Role>()
 				.AddEntityFrameworkStores<DatabaseContext>()
 				.AddErrorDescriber<CustomIdentityValidator>()
+				.AddTokenProvider<DataProtectorTokenProvider<User>>(TokenOptions.DefaultProvider)
 				.AddEntityFrameworkStores<DatabaseContext>();
 			services.AddHttpClient();
 			services.AddHttpContextAccessor();
