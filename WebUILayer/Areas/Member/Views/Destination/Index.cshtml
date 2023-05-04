@@ -39,16 +39,16 @@
                                     @if (destination.Description.Length < 70)
                                     {
                                         <p class="card-text">
-                                            @destination.Description
+                                            @Html.Raw(@destination.Description)
                                         </p>
                                     }
                                     else
                                     {
                                         <p class="card-text">
-                                            @destination.Description.Substring(0, destination.Description.Substring(0, 70).LastIndexOf(" ")) ...
+                                            @Html.Raw(@destination.Description.Substring(0, destination.Description.Substring(0, 130).LastIndexOf(" "))) ...
                                         </p>
                                     }
-                                    <p class="card-text">Fiyat: @String.Format("{0:n}", @destination.Price) ₺</p>
+                                    <p class="card-text">Fiyat: @String.Format("{0:N0}", @destination.Price) ₺</p>
                                 </div>
                                 <div class="card-footer border-top-blue-grey border-top-lighten-5 text-muted">
                                     <span class="float-left">@destination.Date.ToString("dd MMM yyyy")</span>

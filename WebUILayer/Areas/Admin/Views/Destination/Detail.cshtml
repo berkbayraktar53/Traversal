@@ -41,7 +41,7 @@
 				<div class="row mb-3">
 					<label class="col-sm-1 col-form-label">Fiyat</label>
 					<div class="col-sm-3">
-						<input class="form-control" disabled value="@Model.Price ₺" />
+						<input class="form-control" disabled value="@String.Format("{0:N0}", @Model.Price) ₺" />
 					</div>
 					<label class="col-sm-1 col-form-label">Kapaste</label>
 					<div class="col-sm-3">
@@ -49,13 +49,13 @@
 					</div>
 					<label class="col-sm-1 col-form-label">Tarih</label>
 					<div class="col-sm-3">
-						<input class="form-control" disabled value="@Model.Date.ToString("dd/MM/yyyy dddd")" />
+						<input class="form-control" disabled value="@Model.Date.ToString("dd MMMM yyyy dddd")" />
 					</div>
 				</div>
 				<div class="row mb-3">
 					<label class="col-sm-2 col-form-label">Açıklama</label>
 					<div class="col-sm-10">
-						<textarea class="form-control" rows="3" disabled asp-for="Description"></textarea>
+						<p>@Html.Raw(@Model.Description)</p>
 					</div>
 				</div>
 				<div class="row justify-content-end text-center">

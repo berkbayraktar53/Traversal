@@ -36,6 +36,15 @@
 				<p class="mb-0">► @Model.Capacity kişilik kapasite mevcut</p>
 				<p class="mb-0">► @String.Format("{0:N0}", Model.Price) ₺ olarak ücret belirlendi</p>
 				<p class="mb-0">@Html.Raw(@Model.Description)</p>
+				<br />
+				@if (User.Identity.IsAuthenticated)
+				{
+					<a class="btn btn-style btn-secondary" style="display:flex;justify-content:center;color:white">Rezervasyon Yap</a>
+				}
+				else
+				{
+					<h5 class="text-center">Rezervasyon yapmak için üye olmalısınız</h5>
+				}
 				<div class="d-grid left-right mt-5 pb-md-5">
 					<div class="buttons-singles tags">
 						<h4>Etiketler :</h4>

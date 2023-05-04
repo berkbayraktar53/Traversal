@@ -46,14 +46,6 @@
 						{
 							<td>@user.NameSurname</td>
 						}
-						@if (@user.AboutUser.Length > 10)
-						{
-							<td>@user.AboutUser.Substring(0, @user.AboutUser.Substring(0, 10).Length) ...</td>
-						}
-						else
-						{
-							<td>@user.AboutUser</td>
-						}
 						@if (@user.Email.Length > 10)
 						{
 							<td>@user.Email.Substring(0, @user.Email.Substring(0, 10).Length) ...</td>

@@ -36,7 +36,7 @@
 							{
 								<td>@newsletter.Email</td>
 							}
-							<td>@newsletter.Date.ToString("dd/MM/yyyy dddd")</td>
+							<td>@newsletter.Date.ToString("dd MMMM yyyy dddd")</td>
 							@if (newsletter.Status == true)
 							{
 								<td><a class="badge bg-label-success me-1" href="/Admin/Newsletter/ChangeStatus/@newsletter.Id">Aktif</a></td>

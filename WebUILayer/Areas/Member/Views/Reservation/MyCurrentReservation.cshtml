@@ -51,16 +51,16 @@
 										@if (reservation.Destination.Description.Length < 130)
 										{
 											<p class="card-text">
-												@reservation.Destination.Description
+												@Html.Raw(@reservation.Destination.Description)
 											</p>
 										}
 										else
 										{
 											<p class="card-text">
-												@reservation.Destination.Description.Substring(0, @reservation.Destination.Description.Substring(0, 130).LastIndexOf(" ")) ...
+												@Html.Raw(@reservation.Destination.Description.Substring(0, @reservation.Destination.Description.Substring(0, 150).LastIndexOf(" "))) ...
 											</p>
 										}
-										<p class="card-text">Fiyat: @String.Format("{0:n}", @reservation.Destination.Price) ₺</p>
+										<p class="card-text">Fiyat: @String.Format("{0:N0}", @reservation.Destination.Price) ₺</p>
 									</div>
 									<div class="card-footer border-top-blue-grey border-top-lighten-5 text-muted">
 										<span class="float-left">@reservation.Date.ToString("dd MMM yyyy")</span>

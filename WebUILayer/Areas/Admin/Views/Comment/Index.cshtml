@@ -49,9 +49,9 @@
 						{
 							<td>@comment.Destination.City</td>
 						}
-						@if (comment.CommentContent.Length > 20)
+						@if (comment.CommentContent.Length > 15)
 						{
-							<td>@comment.CommentContent.Substring(0, comment.CommentContent.Substring(0, 20).Length) ...</td>
+							<td>@comment.CommentContent.Substring(0, comment.CommentContent.Substring(0, 15).Length) ...</td>
 						}
 						else
 						{

@@ -33,7 +33,7 @@
 								@destination.City Turu
 							</span>
 							<ul class="list-unstyled users-list m-0 float-right">
-								@String.Format("{0:n}", @destination.Price) ₺
+								@String.Format("{0:N0}", destination.Price) ₺
 							</ul>
 							<p class="list-group-item-text mb-0">
 								<span class="blue-grey lighten-2 font-small-3"> @destination.Date.ToString("dd MMMM yyyy") <span style="float:right">@destination.DayNight</span> </span>
